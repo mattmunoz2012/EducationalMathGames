@@ -36,8 +36,24 @@
             opacity: 0.6;
         }
 
+        .top-section {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+
+        .top-section a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .top-section a:hover {
+            opacity: 0.7;
+        }
+
         .container {
-            padding: 40px 20px;
+            padding: 0 20px 40px 20px;
         }
 
         .game-frame {
@@ -48,10 +64,11 @@
             padding: 20px;
             display: flex;
             justify-content: center;
+            margin-bottom: 20px;
         }
 
         footer {
-            margin-top: 60px;
+            margin-top: 40px;
             padding: 20px;
             opacity: 0.5;
             font-size: 14px;
@@ -68,16 +85,16 @@
             height: 550px;
         }
 
-        /* Glass-blur fullscreen button style */
+        /* Glass-blur fullscreen button below game frame */
         .fullscreen-button {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            z-index: 1000;
-            padding: 10px 18px;
-            background: rgba(255, 255, 255, 0.15);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.15);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255,255,255,0.3);
             border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
@@ -91,6 +108,13 @@
             box-shadow: 0 6px 18px rgba(0,0,0,0.6);
             background: rgba(255,255,255,0.25);
         }
+
+        /* Fullscreen icon */
+        .fullscreen-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
     </style>
 </head>
 
@@ -104,15 +128,15 @@
 </nav>
 
 <div class="container">
+    <!-- Top section with Back to Library -->
+    <div class="top-section">
+        <a href="index.html">&larr; Back to Game Library</a>
+    </div>
+
     <h2>Game 1 - Basketball Random</h2>
 
     <div class="game-frame">
         <div class="iframe-wrapper">
-            <!-- Upgraded glass-blur fullscreen button -->
-            <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">
-                Fullscreen
-            </button>
-
             <!-- Basketball Random iframe -->
             <iframe id="basketballRandom" 
                     src="https://lablockedgames.com/funblocked/basket-random/index.html" 
@@ -121,6 +145,17 @@
             </iframe>
         </div>
     </div>
+
+    <!-- Fullscreen button below the game frame -->
+    <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">
+        <!-- Fullscreen icon SVG -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h6v2H6v4H4V4z"/>
+            <path d="M20 4h-6v2h4v4h2V4z"/>
+            <path d="M4 20h6v-2H6v-4H4v6z"/>
+            <path d="M20 20h-6v-2h4v-4h2v6z"/>
+        </svg>
+    </button>
 </div>
 
 <footer>
@@ -128,6 +163,7 @@
 </footer>
 
 <script>
+    // Toggle fullscreen for the iframe
     function toggleFullscreen(iframeId) {
         const iframe = document.getElementById(iframeId);
         if (!document.fullscreenElement) {
