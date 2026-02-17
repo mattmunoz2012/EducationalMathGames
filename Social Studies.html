@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mono Games - Game 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top, #111, #000);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            text-align: center;
+        }
 
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav h1 {
+            letter-spacing: 4px;
+            font-size: 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-frame {
+            position: relative;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid white;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            padding: 10px;
+            display: inline-block;
+        }
+
+        iframe {
+            border: none;
+            border-radius: 20px;
+        }
+
+        /* Fullscreen button with logo */
+        .fullscreen-btn {
+            margin-top: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .fullscreen-btn::before {
+            content: '⛶';
+            font-size: 24px;
+            color: white;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 20px;
+            opacity: 0.5;
+            font-size: 14px;
+        }
+
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>MONO</h1>
+</nav>
+
+<a href="index.html" class="back-home">HOME</a>
+
+<div class="container">
+    <h2>1v1.lol</h2>
+
+    <div class="game-frame">
+        <iframe id="game2" src="https://1v1lolunblocked.com/games/1v1-lol/index.html" width="850" height="638" scrolling="no" allowfullscreen loading="lazy"></iframe>
+        <button class="fullscreen-btn" onclick="toggleFullscreen('game2')"></button>
+    </div>
+</div>
+
+<footer>
+    © 2026 Mono Games
+</footer>
+
+<script>
+    function toggleFullscreen(id) {
+        const iframe = document.getElementById(id);
+        if (!document.fullscreenElement) {
+            iframe.requestFullscreen().catch(err => console.error(err));
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>
