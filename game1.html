@@ -46,7 +46,8 @@
             border-radius: 20px;
             backdrop-filter: blur(15px);
             padding: 20px;
-            display: inline-block;
+            display: flex;
+            justify-content: center;
         }
 
         footer {
@@ -57,17 +58,15 @@
         }
 
         /* Basketball iframe styles */
-        .iframe-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 20px;
+        .iframe-wrapper {
+            position: relative;
+            display: inline-block;
         }
 
         iframe {
             border: none;
+            width: 700px;
+            height: 550px;
         }
 
         .fullscreen-button {
@@ -81,11 +80,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-        }
-
-        .iframe-wrapper {
-            position: relative;
-            display: inline-block;
         }
 
     </style>
@@ -104,21 +98,14 @@
     <h2>Game 1 - Basketball Random</h2>
 
     <div class="game-frame">
-
-        <div class="iframe-container">
-            <!-- Left ad iframe (optional) -->
-            <iframe src="https://lablockedgames.com/160x600.html" width="160" height="600" scrolling="no" allowfullscreen></iframe>
-
-            <!-- Main Basketball Random iframe with fullscreen button -->
-            <div class="iframe-wrapper">
-                <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">Fullscreen</button>
-                <iframe id="basketballRandom" src="https://lablockedgames.com/funblocked/basket-random/index.html" width="700" height="550" scrolling="no" allowfullscreen></iframe>
-            </div>
-
-            <!-- Right ad iframe (optional) -->
-            <iframe src="https://lablockedgames.com/160x600.html" width="160" height="600" scrolling="no" allowfullscreen></iframe>
+        <div class="iframe-wrapper">
+            <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">Fullscreen</button>
+            <iframe id="basketballRandom" 
+                    src="https://lablockedgames.com/funblocked/basket-random/index.html" 
+                    scrolling="no" 
+                    allowfullscreen>
+            </iframe>
         </div>
-
     </div>
 </div>
 
@@ -132,13 +119,3 @@
         const iframe = document.getElementById(iframeId);
         if (!document.fullscreenElement) {
             iframe.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-            });
-        } else {
-            document.exitFullscreen();
-        }
-    }
-</script>
-
-</body>
-</html>
