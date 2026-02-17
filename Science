@@ -137,11 +137,12 @@
 
     <div class="game-frame">
         <div class="iframe-wrapper">
-            <!-- Basketball Random iframe -->
+            <!-- Basketball Random iframe with sandbox to prevent download -->
             <iframe id="basketballRandom" 
-                    src="https://lablockedgames.com/funblocked/basket-random/index.html" 
+                    src="https://lablockedgames.com/funblocked/basket-random/index.html"
                     scrolling="no" 
-                    allowfullscreen>
+                    allowfullscreen
+                    sandbox="allow-scripts allow-same-origin">
             </iframe>
         </div>
     </div>
