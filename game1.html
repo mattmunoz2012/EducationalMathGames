@@ -57,7 +57,6 @@
             font-size: 14px;
         }
 
-        /* Basketball iframe styles */
         .iframe-wrapper {
             position: relative;
             display: inline-block;
@@ -69,19 +68,26 @@
             height: 550px;
         }
 
+        /* Custom fullscreen button style to match site */
         .fullscreen-button {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: -10px;
+            right: -10px;
             z-index: 1000;
-            padding: 10px 15px;
-            background-color: #007BFF;
+            padding: 8px 14px;
+            background-color: #0d6efd; /* Bootstrap blue color */
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            transition: 0.2s;
         }
 
+        .fullscreen-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
@@ -99,7 +105,12 @@
 
     <div class="game-frame">
         <div class="iframe-wrapper">
-            <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">Fullscreen</button>
+            <!-- Custom fullscreen button -->
+            <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">
+                Fullscreen
+            </button>
+
+            <!-- Basketball Random iframe -->
             <iframe id="basketballRandom" 
                     src="https://lablockedgames.com/funblocked/basket-random/index.html" 
                     scrolling="no" 
@@ -114,8 +125,18 @@
 </footer>
 
 <script>
-    // Function to toggle fullscreen for the Basketball Random iframe
+    // Toggle fullscreen for the iframe
     function toggleFullscreen(iframeId) {
         const iframe = document.getElementById(iframeId);
         if (!document.fullscreenElement) {
             iframe.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message} (${err.name})`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>
