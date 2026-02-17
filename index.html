@@ -39,60 +39,63 @@
             width: 200px;
             height: 200px;
             border-radius: 20px;
-            z-index: 1;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            cursor: pointer;
         }
 
-        /* Moving blob/light behind the card */
-        .blob {
-            position: absolute;
-            z-index: 0;
-            top: 50%;
-            left: 50%;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background-color: white;
-            opacity: 0.15;
-            filter: blur(25px);
-            animation: blob-move 6s infinite linear;
+        /* Game image fills the card */
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        @keyframes blob-move {
-            0% { transform: translate(-50%, -50%) translate3d(0, 0, 0); }
-            25% { transform: translate(-50%, -50%) translate3d(60px, 0, 0); }
-            50% { transform: translate(-50%, -50%) translate3d(60px, 60px, 0); }
-            75% { transform: translate(-50%, -50%) translate3d(0, 60px, 0); }
-            100% { transform: translate(-50%, -50%) translate3d(0, 0, 0); }
-        }
-
-        /* Glass overlay with outline */
-        .bg {
+        /* Glass overlay with white border trace */
+        .card::after {
+            content: '';
             position: absolute;
             top: 0; left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
             border-radius: 20px;
             border: 2px solid white;
-            overflow: hidden;
+            box-sizing: border-box;
+            pointer-events: none;
+            animation: trace 4s linear infinite;
         }
 
-        .bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            display: block;
+        /* Animate border using stroke-tracing effect */
+        @keyframes trace {
+            0% { clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%); }
+            25% { clip-path: polygon(0% 0%, 100% 0%, 0% 0%, 0% 0%); }
+            50% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%); }
+            75% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
+            100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%); }
         }
 
-        .card:hover .bg {
-            border-color: white;
+        /* Optional subtle moving light behind card */
+        .blob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(20px);
+            transform: translate(-50%, -50%);
+            animation: blobMove 6s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes blobMove {
+            0% { transform: translate(-50%, -50%) translate(0px, 0px); }
+            25% { transform: translate(-50%, -50%) translate(20px, -10px); }
+            50% { transform: translate(-50%, -50%) translate(0px, 20px); }
+            75% { transform: translate(-50%, -50%) translate(-20px, -10px); }
+            100% { transform: translate(-50%, -50%) translate(0px, 0px); }
         }
 
     </style>
@@ -107,24 +110,18 @@
     <!-- Game 1 card -->
     <a href="game1.html" class="card">
         <div class="blob"></div>
-        <div class="bg">
-            <img src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&quality=100&metadata=none&width=1200" alt="Basketball Random">
-        </div>
+        <img src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&quality=100&metadata=none&width=1200" alt="Basketball Random">
     </a>
 
-    <!-- Placeholder for future games -->
+    <!-- Future game cards -->
     <a href="game2.html" class="card">
         <div class="blob"></div>
-        <div class="bg">
-            <img src="images/game2-logo.png" alt="Game 2">
-        </div>
+        <img src="images/game2-logo.png" alt="Game 2">
     </a>
 
     <a href="game3.html" class="card">
         <div class="blob"></div>
-        <div class="bg">
-            <img src="images/game3-logo.png" alt="Game 3">
-        </div>
+        <img src="images/game3-logo.png" alt="Game 3">
     </a>
 </div>
 
