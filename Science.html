@@ -1,146 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basket Random</title>
+    <title>Mono Games - Basketball Random</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-body {
-    margin: 0;
-    background: #0f0f0f;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Home Button */
-.home-btn {
-    margin-top: 30px;
-    margin-bottom: 20px;
-    padding: 10px 25px;
-    font-size: 16px;
-    color: white;
-    background: rgba(255,255,255,0.1);
-    border: 2px solid white;
-    border-radius: 6px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.2s ease;
-}
-
-.home-btn:hover {
-    background: white;
-    color: black;
-}
-
-/* Game Container */
-.game-wrapper {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 12px;
-    border: 3px solid white;
-}
-
-/* Fullscreen Icon */
-.fullscreen-btn {
-    text-align: right;
-    margin-bottom: 8px;
-    cursor: pointer;
-    color: white;
-    font-size: 18px;
-}
-</style>
-</head>
-
-<body>
-
-<a href="index.html" class="home-btn">HOME</a>
-
-<div class="game-wrapper">
-    <div class="fullscreen-btn" onclick="goFullscreen()">⛶</div>
-
-    <!-- DO NOT TOUCH THE IFRAME BELOW -->
-    <iframe src="<html>
-<head>
-    <base target="_blank">
     <style>
-        /* Style for the fullscreen button */
-        .fullscreen-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            padding: 10px 15px;
-            background-color: #007BFF;
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top, #111, #000);
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            text-align: center;
+            overflow-x: hidden;
         }
-        /* Container for the iframes */
-        .iframe-container {
+
+        nav {
             display: flex;
             justify-content: space-between;
-            margin: 0;
-            padding: 0;
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        /* Style for each iframe */
+
+        nav h1 {
+            letter-spacing: 4px;
+            font-size: 22px;
+        }
+
+        .container {
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Game frame sized to fit the iframe exactly */
+        .game-frame {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            padding: 0; /* remove extra padding */
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            width: 700px; /* match iframe width */
+        }
+
+        .iframe-wrapper {
+            position: relative;
+        }
+
         iframe {
             border: none;
+            width: 700px;
+            height: 550px;
+            border-radius: 20px;
         }
+
+        /* Fullscreen button below the game frame */
+        .fullscreen-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: 0.25s ease;
+        }
+
+        .fullscreen-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+            background: rgba(255,255,255,0.25);
+        }
+
+        .fullscreen-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Centered Home button above game frame */
+        .home-button {
+            position: absolute;
+            top: 0;
+            transform: translateY(-50%);
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .home-button:hover {
+            color: white;
+            text-shadow: 0 0 8px white, 0 0 16px white, 0 0 24px white;
+            background: rgba(255,255,255,0.25);
+        }
+
     </style>
 </head>
+
 <body>
-    <div class="iframe-container">
-        <div style="flex-direction: column; margin-right: 60px;">
-            <iframe src="https://lablockedgames.com/160x600.html" width="160" height="600" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" webkitallowfullscreen="true" mozallowfullscreen="true" msallowfullscreen="true" allowfullscreen="true"></iframe>
-        </div>
-        <div style="flex-direction: column; position: relative;">
-            <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">Fullscreen</button>
-            <iframe id="basketballRandom" src="https://lablockedgames.com/funblocked/basket-random/index.html" width="700" height="550" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" webkitallowfullscreen="true" mozallowfullscreen="true" msallowfullscreen="true" allowfullscreen="true"></iframe>
-        </div>
-        <div style="flex-direction: column; margin-left: 60px;">
-            <iframe src="https://lablockedgames.com/160x600.html" width="160" height="600" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" webkitallowfullscreen="true" mozallowfullscreen="true" msallowfullscreen="true" allowfullscreen="true"></iframe>
+
+<nav>
+    <h1>MONO</h1>
+</nav>
+
+<div class="container">
+    <!-- Centered Home button above the game frame -->
+    <a href="index.html" class="home-button">Home</a>
+
+    <div class="game-frame">
+        <div class="iframe-wrapper">
+            <!-- Basketball Random iframe with sandbox -->
+            <iframe id="basketballRandom" 
+                    src="https://lablockedgames.com/funblocked/basket-random/index.html"
+                    scrolling="no" 
+                    allowfullscreen
+                    sandbox="allow-scripts allow-same-origin">
+            </iframe>
         </div>
     </div>
 
-    <script>
-        // Function to toggle fullscreen for the Basketball Random iframe
-        function toggleFullscreen(iframeId) {
-            const iframe = document.getElementById(iframeId);
-            if (!document.fullscreenElement) {
-                iframe.requestFullscreen().catch(err => {
-                    console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                });
-            } else {
-                document.exitFullscreen();
-            }
-        }
-    </script>
-</body>
-</html>" 
-            width="850" 
-            height="638" 
-            frameborder="0" 
-            scrolling="no" 
-            allowfullscreen>
-    </iframe>
-
+    <!-- Fullscreen button below the game frame -->
+    <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h6v2H6v4H4V4z"/>
+            <path d="M20 4h-6v2h4v4h2V4z"/>
+            <path d="M4 20h6v-2H6v-4H4v6z"/>
+            <path d="M20 20h-6v-2h4v-4h2v6z"/>
+        </svg>
+    </button>
 </div>
 
+<footer>
+    © 2026 Mono Games
+</footer>
+
 <script>
-function goFullscreen() {
-    const iframe = document.querySelector("iframe");
-    if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-    } else if (iframe.webkitRequestFullscreen) {
-        iframe.webkitRequestFullscreen();
-    } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
+    // Toggle fullscreen for the iframe
+    function toggleFullscreen(iframeId) {
+        const iframe = document.getElementById(iframeId);
+        if (!document.fullscreenElement) {
+            iframe.requestFullscreen().catch(err => {
+                console.error(`Error attempting fullscreen: ${err.message} (${err.name})`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
     }
-}
 </script>
 
 </body>
