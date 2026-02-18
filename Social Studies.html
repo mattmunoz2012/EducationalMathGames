@@ -15,29 +15,14 @@
         }
 
         nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 40px;
+            padding: 20px 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         nav h1 {
             letter-spacing: 4px;
             font-size: 22px;
-        }
-
-        .back-home {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 14px;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 12px;
-            border: 1px solid white;
+            margin: 0;
         }
 
         .container {
@@ -45,6 +30,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        /* Home button centered above frame */
+        .home-btn {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 14px;
+            border: 1px solid white;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
         }
 
         .game-frame {
@@ -62,17 +60,17 @@
             border-radius: 16px;
             width: 930px;
             height: 534px;
+            display: block;
         }
 
+        /* Fullscreen logo button */
         .fullscreen-btn {
             margin-top: 15px;
-            padding: 10px 20px;
-            font-size: 14px;
+            background: none;
+            border: none;
             cursor: pointer;
-            background: rgba(255,255,255,0.05);
+            font-size: 26px;
             color: white;
-            border: 1px solid white;
-            border-radius: 12px;
         }
 
         footer {
@@ -98,11 +96,12 @@
     <h1>MONO</h1>
 </nav>
 
-<a href="index.html" class="back-home">HOME</a>
-
 <div class="container">
-    <h2>Obby on a Bike</h2>
 
+    <!-- Centered Home Button -->
+    <a href="index.html" class="home-btn">HOME</a>
+
+    <!-- Game Frame -->
     <div class="game-frame">
         <iframe id="game2"
             src="https://files.twoplayergames.org/files/games/h1/obby-on-a-bike-v01e/index.html"
@@ -111,7 +110,9 @@
         </iframe>
     </div>
 
-    <button class="fullscreen-btn" onclick="toggleFullscreen()">Go Fullscreen</button>
+    <!-- Fullscreen Logo Only -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶</button>
+
 </div>
 
 <footer>
