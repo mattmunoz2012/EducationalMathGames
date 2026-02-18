@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometry Dash Lite</title>
+
+<style>
+body {
+    margin: 0;
+    background: #0f0f0f;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Home Button */
+.home-btn {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px 25px;
+    font-size: 16px;
+    color: white;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid white;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.home-btn:hover {
+    background: white;
+    color: black;
+}
+
+/* Game Container */
+.game-wrapper {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border: 3px solid white;
+}
+
+/* Fullscreen Icon */
+.fullscreen-btn {
+    text-align: right;
+    margin-bottom: 8px;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+}
+
+/* Iframe EXACT SIZE */
+iframe {
+    width: 850px;
+    height: 638px;
+    border: none;
+}
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="home-btn">HOME</a>
+
+<div class="game-wrapper">
+    <div class="fullscreen-btn" onclick="goFullscreen()">⛶</div>
+
+    <iframe 
+        src="https://ozgames.io/geometry-dash.embed"
+        allowfullscreen>
+    </iframe>
+</div>
+
+<script>
+function goFullscreen() {
+    const iframe = document.querySelector("iframe");
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+    }
+}
+</script>
+
+</body>
+</html>
