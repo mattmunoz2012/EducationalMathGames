@@ -98,6 +98,33 @@
             100% { transform: translate(-50%, -50%) translate(0px, 0px); }
         }
 
+        /* Ownership styling with rainbow animation */
+        .ownership {
+            margin: 20px 0 10px 0;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+        }
+
+        .owner-name {
+            border: 2px solid;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.05);
+            border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1;
+            animation: rainbow-border 4s linear infinite;
+        }
+
+        @keyframes rainbow-border {
+            0% { border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1; }
+            25% { border-image: linear-gradient(90deg, orange, yellow, green, blue, indigo, violet, red) 1; }
+            50% { border-image: linear-gradient(90deg, yellow, green, blue, indigo, violet, red, orange) 1; }
+            75% { border-image: linear-gradient(90deg, green, blue, indigo, violet, red, orange, yellow) 1; }
+            100% { border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1; }
+        }
+
     </style>
 </head>
 <body>
@@ -107,30 +134,46 @@
 </nav>
 
 <div class="container">
-    <!-- Row 1: 10 games -->
-    <a href="Science.html" class="card"><div class="blob"></div><img src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&quality=100&metadata=none&width=1200" alt="Basketball Random"></a>
-    <a href="Social Studies.html" class="card"><div class="blob"></div><img src="https://tr.rbxcdn.com/180DAY-2842cbf03ab7d4338b9d99a1731c14c0/768/432/Image/Webp/noFilter" alt="Obby But On A Bike"></a>
-    <a href="Stem.html" class="card"><div class="blob"></div><img src="https://m.media-amazon.com/images/M/MV5BNjIzN2YwYmMtYzU4Mi00M2U1LTgyM2ItMzM3MTI0MTVmY2M0XkEyXkFqcGc@._V1_.jpg" alt="Geometry Dash"></a>
-    <a href="Game4.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/ff5555/ffffff?text=Game+4" alt="Game 4"></a>
-    <a href="Game5.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/55ff55/ffffff?text=Game+5" alt="Game 5"></a>
-    <a href="Game6.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/5555ff/ffffff?text=Game+6" alt="Game 6"></a>
-    <a href="Game7.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/ff55ff/ffffff?text=Game+7" alt="Game 7"></a>
-    <a href="Game8.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/55ffff/ffffff?text=Game+8" alt="Game 8"></a>
-    <a href="Game9.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/ffff55/ffffff?text=Game+9" alt="Game 9"></a>
-    <a href="Game10.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/aaaaaa/ffffff?text=Game+10" alt="Game 10"></a>
+    <!-- Row 1 - 10 game cards -->
+    <a href="Science.html" class="card">
+        <div class="blob"></div>
+        <img src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&quality=100&metadata=none&width=1200" alt="Basketball Random">
+    </a>
 
-    <!-- Row 2: 10 games -->
-    <a href="Game11.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/ff9999/ffffff?text=Game+11" alt="Game 11"></a>
-    <a href="Game12.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/99ff99/ffffff?text=Game+12" alt="Game 12"></a>
-    <a href="Game13.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/9999ff/ffffff?text=Game+13" alt="Game 13"></a>
-    <a href="Game14.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/ff99ff/ffffff?text=Game+14" alt="Game 14"></a>
-    <a href="Game15.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/99ffff/ffffff?text=Game+15" alt="Game 15"></a>
-    <a href="Game16.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/ffff99/ffffff?text=Game+16" alt="Game 16"></a>
-    <a href="Game17.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/aaaaaa/ffffff?text=Game+17" alt="Game 17"></a>
-    <a href="Game18.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/ffcc99/ffffff?text=Game+18" alt="Game 18"></a>
-    <a href="Game19.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/99ccff/ffffff?text=Game+19" alt="Game 19"></a>
-    <a href="Game20.html" class="card"><div class="blob"></div><img src="https://via.placeholder.com/200x200/cc99ff/ffffff?text=Game+20" alt="Game 20"></a>
+    <a href="Social Studies.html" class="card">
+        <div class="blob"></div>
+        <img src="https://tr.rbxcdn.com/180DAY-2842cbf03ab7d4338b9d99a1731c14c0/768/432/Image/Webp/noFilter" alt="Obby But On A Bike">
+    </a>
+
+    <a href="Stem.html" class="card">
+        <div class="blob"></div>
+        <img src="https://m.media-amazon.com/images/M/MV5BNjIzN2YwYmMtYzU4Mi00M2U1LTgyM2ItMzM3MTI0MTVmY2M0XkEyXkFqcGc@._V1_.jpg" alt="Geometry Dash">
+    </a>
+
+    <!-- Add more cards here for row 1 -->
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 4"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 5"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 6"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 7"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 8"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 9"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 10"></a>
+
+    <!-- Row 2 - 10 game cards -->
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 11"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 12"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 13"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 14"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 15"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 16"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 17"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 18"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 19"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 20"></a>
 </div>
+
+<!-- Ownership Line -->
+<div class="ownership">By <span class="owner-name">Matthew M</span></div>
 
 <footer>
     © 2026 Mono Games
