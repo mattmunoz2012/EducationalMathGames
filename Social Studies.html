@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mono Games - Game 2</title>
+    <title>Mono Games - Obby on a Bike</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
         body {
             margin: 0;
@@ -25,9 +26,18 @@
             font-size: 22px;
         }
 
-        nav a {
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             color: white;
             text-decoration: none;
+            font-weight: bold;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            border: 1px solid white;
         }
 
         .container {
@@ -49,24 +59,20 @@
 
         iframe {
             border: none;
-            border-radius: 20px;
+            border-radius: 16px;
+            width: 930px;
+            height: 534px;
         }
 
-        /* Fullscreen button with logo */
         .fullscreen-btn {
             margin-top: 15px;
-            background: none;
-            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
-            position: relative;
-        }
-
-        .fullscreen-btn::before {
-            content: '⛶';
-            font-size: 24px;
+            background: rgba(255,255,255,0.05);
             color: white;
+            border: 1px solid white;
+            border-radius: 12px;
         }
 
         footer {
@@ -76,19 +82,14 @@
             font-size: 14px;
         }
 
-        .back-home {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 12px;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 12px;
-            border: 1px solid white;
+        /* Responsive */
+        @media (max-width: 1000px) {
+            iframe {
+                width: 95vw;
+                height: 55vw;
+            }
         }
+
     </style>
 </head>
 <body>
@@ -100,12 +101,17 @@
 <a href="index.html" class="back-home">HOME</a>
 
 <div class="container">
-    <h2>1v1.lol</h2>
+    <h2>Obby on a Bike</h2>
 
     <div class="game-frame">
-        <iframe id="game2" src="https://1v1lolunblocked.com/games/1v1-lol/index.html" width="850" height="638" scrolling="no" allowfullscreen loading="lazy"></iframe>
-        <button class="fullscreen-btn" onclick="toggleFullscreen('game2')"></button>
+        <iframe id="game2"
+            src="https://files.twoplayergames.org/files/games/h1/obby-on-a-bike-v01e/index.html"
+            allowfullscreen
+            loading="lazy">
+        </iframe>
     </div>
+
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">Go Fullscreen</button>
 </div>
 
 <footer>
@@ -113,10 +119,10 @@
 </footer>
 
 <script>
-    function toggleFullscreen(id) {
-        const iframe = document.getElementById(id);
+    function toggleFullscreen() {
+        const iframe = document.getElementById("game2");
         if (!document.fullscreenElement) {
-            iframe.requestFullscreen().catch(err => console.error(err));
+            iframe.requestFullscreen().catch(err => console.log(err));
         } else {
             document.exitFullscreen();
         }
