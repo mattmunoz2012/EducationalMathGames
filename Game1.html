@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>ULTRAKILL - Google Drive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +16,7 @@
             margin: 0;
             background: #000;
             color: white;
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -46,36 +46,37 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* The Main Game Frame */
+        /* The Glass Frame */
         .game-container {
             position: relative;
             width: 90vw;
-            height: 80vh;
+            height: 85vh;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             backdrop-filter: blur(15px);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-            overflow: hidden;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
         }
 
-        iframe {
+        /* The UNTOUCHED Game Iframe */
+        #gameFrame {
             width: 100%;
             flex-grow: 1;
             border: none;
             background: #000;
         }
 
-        /* Control Bar */
+        /* Purple Glass Controls */
         .control-bar {
-            height: 65px;
-            background: rgba(15, 5, 25, 0.9);
+            height: 60px;
+            background: rgba(10, 5, 20, 0.9);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
+            padding: 0 25px;
             border-top: 1px solid var(--glass-border);
         }
 
@@ -83,30 +84,28 @@
             background: rgba(186, 103, 255, 0.1);
             border: 1px solid var(--accent-purple);
             color: white;
-            padding: 10px 22px;
-            border-radius: 12px;
+            padding: 8px 18px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 12px;
-            transition: all 0.3s ease;
+            font-size: 11px;
+            transition: 0.3s;
+            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 8px;
-            text-decoration: none;
         }
 
         .btn:hover {
             background: var(--accent-purple);
-            box-shadow: 0 0 20px rgba(186, 103, 255, 0.6);
-            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--accent-purple);
         }
 
         .status {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--accent-purple);
-            text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: bold;
         }
@@ -117,123 +116,34 @@
 <div class="stars-container" id="stars"></div>
 
 <div class="game-container">
-    <iframe id="gameFrame" allow="fullscreen; autoplay; gamepad"></iframe>
+    <iframe src="ULTRAKILL.html" id="gameFrame" allow="fullscreen; autoplay; gamepad; keyboard"></iframe>
 
     <div class="control-bar">
-        <a href="index.html" class="btn">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L8.707 1.5Z"/></svg>
-            Home
-        </a>
-
-        <div class="status">ULTRAKILL LOADING...</div>
-
-        <button class="btn" onclick="toggleFullScreen()">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10.5 1a.5.5 0 0 1 0-1h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4zM1.5 10.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm14.5 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/></svg>
-            Fullscreen
-        </button>
+        <a href="index.html" class="btn">HOME</a>
+        <div class="status">ULTRAKILL LOADED</div>
+        <button class="btn" onclick="toggleFS()">FULLSCREEN</button>
     </div>
 </div>
 
 <script>
-    // --- Star Background Logic ---
+    // Stars
     const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 80; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        const size = Math.random() * 3 + 'px';
-        star.style.width = size;
-        star.style.height = size;
+        const size = Math.random() * 2 + 'px';
+        star.style.width = size; star.style.height = size;
         star.style.top = Math.random() * 100 + '%';
         star.style.left = Math.random() * 100 + '%';
         star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
         starsContainer.appendChild(star);
     }
 
-    // --- ULTRAKILL INJECTION ---
-    const gameCode = `
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"><\/script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-L7856P3VNT');
-        <\/script>
-        <!DOCTYPE html>
-        <html lang="en-us">
-        <head>
-            <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@master/ultrakill/">
-            <meta charset="utf-8">
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-            <style>
-                html, body { margin: 0; padding: 0; overflow: hidden; height: 100%; width: 100%; background: #000; }
-                #unity-canvas { width: 100%; height: 100%; }
-                #loading-text { color: white; font-family: sans-serif; font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-            </style>
-        </head>
-        <body>
-            <div id='loading-text'>LOADING ULTRAKILL...</div>
-            <canvas id="unity-canvas" tabindex="-1" hidden></canvas>
-            <script src="Build/ultrakill.loader.js"><\/script>
-            <script>
-                var canvas = document.querySelector("#unity-canvas");
-                function resizeCanvas() {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                }
-                window.addEventListener('resize', resizeCanvas);
-
-                function mergeFiles(fileParts) {
-                    return new Promise((resolve, reject) => {
-                        let buffers = [];
-                        function fetchPart(index) {
-                            if (index >= fileParts.length) {
-                                let mergedBlob = new Blob(buffers);
-                                resolve(URL.createObjectURL(mergedBlob));
-                                return;
-                            }
-                            fetch(fileParts[index]).then(r => r.arrayBuffer()).then(data => {
-                                buffers.push(data);
-                                fetchPart(index + 1);
-                            }).catch(reject);
-                        }
-                        fetchPart(0);
-                    });
-                }
-                function getParts(file, start, end) {
-                    let parts = [];
-                    for (let i = start; i <= end; i++) parts.push(file + ".part" + i);
-                    return parts;
-                }
-                Promise.all([
-                    mergeFiles(getParts("Build/ultrakill.data.unityweb", 1, 4)),
-                    mergeFiles(getParts("Build/ultrakill.wasm.unityweb", 1, 2))
-                ]).then(([dataUrl, wasmurl]) => {
-                    canvas.hidden = false;
-                    createUnityInstance(canvas, {
-                        dataUrl: dataUrl,
-                        frameworkUrl: "Build/ultrakill.framework.js.unityweb",
-                        codeUrl: wasmurl,
-                        streamingAssetsUrl: "StreamingAssets",
-                        companyName: "Hakita and Cake Logic",
-                        productName: "ULTRAKILL",
-                        productVersion: "1.4",
-                    }).then(() => {
-                        document.querySelector("#loading-text").remove();
-                    });
-                });
-            <\/script>
-        </body>
-        </html>
-    `;
-
-    const blob = new Blob([gameCode], { type: 'text/html' });
-    document.getElementById('gameFrame').src = URL.createObjectURL(blob);
-
-    // --- Fullscreen Logic ---
-    function toggleFullScreen() {
-        var elem = document.getElementById("gameFrame");
-        if (elem.requestFullscreen) { elem.requestFullscreen(); } 
-        else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+    // Direct Fullscreen Toggle
+    function toggleFS() {
+        const f = document.getElementById("gameFrame");
+        if (f.requestFullscreen) f.requestFullscreen();
+        else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen();
     }
 </script>
 
