@@ -11,7 +11,13 @@
     <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@master/ultrakill/">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | ULTRAKILL</title>
+    
+    <title>Home - Google Drive</title>
+    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+
     <style>
         html, body {
             margin: 0;
@@ -30,7 +36,7 @@
             left: 0;
         }
 
-        /* --- FLOATING UI BUTTONS --- */
+        /* FLOATING UI BUTTONS */
         .floating-controls {
             position: fixed;
             bottom: 20px;
@@ -38,7 +44,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 15px;
-            z-index: 999999; /* Ensure it stays above the game */
+            z-index: 999999;
         }
 
         .float-btn {
@@ -69,7 +75,7 @@
 
 <body>
     <div class="floating-controls">
-        <a href="https://your-vercel-site.vercel.app/index.html" class="float-btn">Home</a>
+        <a href="index.html" class="float-btn">Home</a>
         <button class="float-btn" onclick="openFullscreen()">Fullscreen</button>
     </div>
 
@@ -80,7 +86,6 @@
     <script>
         var canvas = document.querySelector("#unity-canvas");
 
-        // Fullscreen Function
         function openFullscreen() {
             if (canvas.requestFullscreen) {
                 canvas.requestFullscreen();
