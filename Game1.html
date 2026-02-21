@@ -1,136 +1,123 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home - Google Drive</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <title>ULTRAKILL - Google Drive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
 
-<style>
-:root {
-    --glass-bg: rgba(45, 15, 66, 0.4);
-    --glass-border: rgba(186, 103, 255, 0.3);
-    --accent-purple: #ba67ff;
-}
+    <style>
+        :root {
+            --glass-bg: rgba(45, 15, 66, 0.4);
+            --glass-border: rgba(186, 103, 255, 0.3);
+            --accent-purple: #ba67ff;
+        }
 
-body {
-    margin: 0;
-    background: #000;
-    color: white;
-    font-family: 'Inter', -apple-system, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
-}
+        body {
+            margin: 0;
+            background: #000;
+            color: white;
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-/* Star Background (Same as main page for consistency) */
-.stars-container {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-    background: radial-gradient(circle at center, #1a0b2e 0%, #000 100%);
-}
+        /* Star Background */
+        .stars-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a0b2e 0%, #000 100%);
+        }
 
-.star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.5;
-    animation: twinkle var(--duration) infinite ease-in-out;
-}
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
 
-@keyframes twinkle {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
 
-/* The Main Game Frame */
-.game-container {
-    position: relative;
-    width: 85vw;
-    height: 75vh;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(186, 103, 255, 0.1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
+        /* The Main Game Frame */
+        .game-container {
+            position: relative;
+            width: 90vw;
+            height: 80vh;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
 
-iframe {
-    width: 100%;
-    flex-grow: 1;
-    border: none;
-    background: #000;
-}
+        iframe {
+            width: 100%;
+            flex-grow: 1;
+            border: none;
+            background: #000;
+        }
 
-/* Control Bar at Bottom */
-.control-bar {
-    height: 60px;
-    background: rgba(15, 5, 25, 0.8);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-    border-top: 1px solid var(--glass-border);
-}
+        /* Control Bar */
+        .control-bar {
+            height: 65px;
+            background: rgba(15, 5, 25, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            border-top: 1px solid var(--glass-border);
+        }
 
-/* Purple Glass Buttons */
-.btn {
-    background: rgba(186, 103, 255, 0.1);
-    border: 1px solid var(--accent-purple);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 12px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-}
+        .btn {
+            background: rgba(186, 103, 255, 0.1);
+            border: 1px solid var(--accent-purple);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
 
-.btn:hover {
-    background: var(--accent-purple);
-    box-shadow: 0 0 20px rgba(186, 103, 255, 0.6);
-    transform: translateY(-2px);
-}
+        .btn:hover {
+            background: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(186, 103, 255, 0.6);
+            transform: translateY(-2px);
+        }
 
-.btn:active {
-    transform: translateY(0);
-}
-
-/* Status Indicator */
-.status {
-    font-size: 11px;
-    color: var(--accent-purple);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: bold;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
-</style>
+        .status {
+            font-size: 11px;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="stars-container" id="stars"></div>
 
 <div class="game-container">
-    <iframe src="https://example.com" id="gameFrame"></iframe>
+    <iframe id="gameFrame" allow="fullscreen; autoplay; gamepad"></iframe>
 
     <div class="control-bar">
         <a href="index.html" class="btn">
@@ -138,7 +125,7 @@ iframe {
             Home
         </a>
 
-        <div class="status">System Online</div>
+        <div class="status">ULTRAKILL LOADING...</div>
 
         <button class="btn" onclick="toggleFullScreen()">
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10.5 1a.5.5 0 0 1 0-1h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4zM1.5 10.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm14.5 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/></svg>
@@ -148,31 +135,106 @@ iframe {
 </div>
 
 <script>
-// Star Generator
-const starsContainer = document.getElementById('stars');
-for (let i = 0; i < 100; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 3 + 'px';
-    star.style.width = size;
-    star.style.height = size;
-    star.style.top = Math.random() * 100 + '%';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-    starsContainer.appendChild(star);
-}
-
-// Fullscreen Logic
-function toggleFullScreen() {
-    var elem = document.getElementById("gameFrame");
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
+    // --- Star Background Logic ---
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 3 + 'px';
+        star.style.width = size;
+        star.style.height = size;
+        star.style.top = Math.random() * 100 + '%';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+        starsContainer.appendChild(star);
     }
-}
+
+    // --- ULTRAKILL INJECTION ---
+    const gameCode = `
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"><\/script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-L7856P3VNT');
+        <\/script>
+        <!DOCTYPE html>
+        <html lang="en-us">
+        <head>
+            <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@master/ultrakill/">
+            <meta charset="utf-8">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <style>
+                html, body { margin: 0; padding: 0; overflow: hidden; height: 100%; width: 100%; background: #000; }
+                #unity-canvas { width: 100%; height: 100%; }
+                #loading-text { color: white; font-family: sans-serif; font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+            </style>
+        </head>
+        <body>
+            <div id='loading-text'>LOADING ULTRAKILL...</div>
+            <canvas id="unity-canvas" tabindex="-1" hidden></canvas>
+            <script src="Build/ultrakill.loader.js"><\/script>
+            <script>
+                var canvas = document.querySelector("#unity-canvas");
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                window.addEventListener('resize', resizeCanvas);
+
+                function mergeFiles(fileParts) {
+                    return new Promise((resolve, reject) => {
+                        let buffers = [];
+                        function fetchPart(index) {
+                            if (index >= fileParts.length) {
+                                let mergedBlob = new Blob(buffers);
+                                resolve(URL.createObjectURL(mergedBlob));
+                                return;
+                            }
+                            fetch(fileParts[index]).then(r => r.arrayBuffer()).then(data => {
+                                buffers.push(data);
+                                fetchPart(index + 1);
+                            }).catch(reject);
+                        }
+                        fetchPart(0);
+                    });
+                }
+                function getParts(file, start, end) {
+                    let parts = [];
+                    for (let i = start; i <= end; i++) parts.push(file + ".part" + i);
+                    return parts;
+                }
+                Promise.all([
+                    mergeFiles(getParts("Build/ultrakill.data.unityweb", 1, 4)),
+                    mergeFiles(getParts("Build/ultrakill.wasm.unityweb", 1, 2))
+                ]).then(([dataUrl, wasmurl]) => {
+                    canvas.hidden = false;
+                    createUnityInstance(canvas, {
+                        dataUrl: dataUrl,
+                        frameworkUrl: "Build/ultrakill.framework.js.unityweb",
+                        codeUrl: wasmurl,
+                        streamingAssetsUrl: "StreamingAssets",
+                        companyName: "Hakita and Cake Logic",
+                        productName: "ULTRAKILL",
+                        productVersion: "1.4",
+                    }).then(() => {
+                        document.querySelector("#loading-text").remove();
+                    });
+                });
+            <\/script>
+        </body>
+        </html>
+    `;
+
+    const blob = new Blob([gameCode], { type: 'text/html' });
+    document.getElementById('gameFrame').src = URL.createObjectURL(blob);
+
+    // --- Fullscreen Logic ---
+    function toggleFullScreen() {
+        var elem = document.getElementById("gameFrame");
+        if (elem.requestFullscreen) { elem.requestFullscreen(); } 
+        else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+    }
 </script>
 
 </body>
