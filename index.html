@@ -99,6 +99,27 @@ nav h1 {
     text-decoration: none;
 }
 
+/* CSS for Game Pictures */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: transform 0.5s ease;
+}
+
+/* Hide the image element if the src is empty so the blob shows */
+.card img[src=""], .card img:not([src]) {
+    display: none;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
 .card:hover {
     transform: translateY(-10px);
     background: rgba(186, 103, 255, 0.15);
@@ -106,7 +127,7 @@ nav h1 {
     box-shadow: 0 0 30px rgba(186, 103, 255, 0.3);
 }
 
-/* Pulsing Purple Glow inside cards */
+/* Pulsing Purple Glow (Shows if no image is present) */
 .blob {
     width: 60px;
     height: 60px;
@@ -115,6 +136,7 @@ nav h1 {
     filter: blur(25px);
     opacity: 0.4;
     animation: pulse 4s infinite ease-in-out;
+    z-index: 0;
 }
 
 @keyframes pulse {
@@ -122,7 +144,7 @@ nav h1 {
     50% { transform: scale(1.5); opacity: 0.6; }
 }
 
-/* The Fixed Trace Animation */
+/* Trace Animation Border */
 .card::after {
     content: '';
     position: absolute;
@@ -185,26 +207,30 @@ footer {
 </nav>
 
 <div class="container">
-    <a href="Game1.html" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
-    <a href="#" class="card"><div class="blob"></div></a>
+    <a href="Game1.html" class="card">
+        <img src="https://m.media-amazon.com/images/M/MV5BNGIyZDE4OTYtNjBhOS00NzFkLTkyYWMtYzAzNWUxZThmMDBlXkEyXkFqcGc@._V1_.jpg">
+        <div class="blob"></div>
+    </a>
+
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="blob"></div></a>
 </div>
 
 <div class="ownership">CURATED BY<br><span class="owner-name">Matthew M</span></div>
@@ -212,7 +238,7 @@ footer {
 <footer>© 2026 Home - Google Drive</footer>
 
 <script>
-// --- Star Generator ---
+// Star Generator
 const starsContainer = document.getElementById('stars');
 for (let i = 0; i < 150; i++) {
     const star = document.createElement('div');
@@ -226,24 +252,16 @@ for (let i = 0; i < 150; i++) {
     starsContainer.appendChild(star);
 }
 
-// --- Stealth Switcheroo Script ---
+// Cloak Script
 (function() {
-    if (window.name === 'cloaked_tab' || document.documentElement.getAttribute('data-cloaked') === 'true') {
-        return;
-    }
-
+    if (window.name === 'cloaked_tab' || document.documentElement.getAttribute('data-cloaked') === 'true') return;
     window.onload = function() {
         const newTab = window.open('about:blank', 'cloaked_tab');
-        
         if (newTab) {
             document.documentElement.setAttribute('data-cloaked', 'true');
-            const content = document.documentElement.outerHTML;
-            
             newTab.document.open();
-            newTab.document.write(content);
+            newTab.document.write(document.documentElement.outerHTML);
             newTab.document.close();
-
-            // Replace current tab with Google Drive instantly
             window.location.replace("https://drive.google.com");
         }
     };
