@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html data-cloaked="false">
-<head>
+<html 
 <title>Home - Google Drive</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -217,25 +216,3 @@ footer {
 </footer>
 
 <script>
-window.onload = function() {
-    if (document.documentElement.getAttribute('data-cloaked') === 'true') return;
-    if (window !== window.top) return;
-
-    const newTab = window.open('about:blank', '_blank');
-    if (newTab) {
-        document.documentElement.setAttribute('data-cloaked', 'true');
-        const pageContent = document.documentElement.outerHTML;
-
-        newTab.document.open();
-        newTab.document.write(pageContent);
-        newTab.document.close();
-
-        window.close();
-        setTimeout(() => {
-            window.location.replace("https://www.google.com");
-        }, 150);
-    }
-};
-</script>
-</body>
-</html>
