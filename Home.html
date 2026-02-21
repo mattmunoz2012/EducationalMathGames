@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-cloaked="false">
+<html>
 <head>
 <title>Home - Google Drive</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,7 +56,6 @@ nav h1 {
     display: block;
 }
 
-/* Fixed Trace Animation */
 .card::after {
     content: '';
     position: absolute;
@@ -72,11 +71,11 @@ nav h1 {
 }
 
 @keyframes trace {
-    0%   { clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0); }
-    25%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0); }
-    50%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); }
-    75%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%); }
-    100% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0); }
+    0% { clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%); }
+    25% { clip-path: polygon(0% 0%, 100% 0%, 0% 0%, 0% 0%); }
+    50% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%); }
+    75% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
+    100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%); }
 }
 
 .blob {
@@ -168,29 +167,43 @@ nav h1 {
 
 <script>
 window.onload = function() {
-    // 1. Check if we've already "cloaked" this page. If yes, stop here.
-    if (document.documentElement.getAttribute('data-cloaked') === 'true') return;
+    // Prevent infinite loops if this page is already inside the about:blank iframe
+    if (window !== window.top) return;
 
-    // 2. Open the about:blank tab
     const newTab = window.open('about:blank', '_blank');
-    if (newTab) {
-        // 3. Mark the current HTML as "cloaked" so the new tab doesn't try to open another tab
-        document.documentElement.setAttribute('data-cloaked', 'true');
-        
-        // 4. Get the entire HTML of this page
-        const pageContent = document.documentElement.outerHTML;
+    
+    // If a popup blocker stops the tab from opening, exit the function
+    if (!newTab) return;
 
-        // 5. Write that HTML directly into the new tab
-        newTab.document.open();
-        newTab.document.write(pageContent);
-        newTab.document.close();
+    // Get current favicon
+    const favicon = document.querySelector("link[rel~='icon']");
+    const faviconHref = favicon ? favicon.href : '';
 
-        // 6. Close the original tab or redirect to Google
-        window.close();
-        setTimeout(() => {
-            window.location.replace("https://www.google.com");
-        }, 150);
-    }
+    newTab.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${document.title}</title>
+            ${faviconHref ? `<link rel="icon" href="${faviconHref}">` : ''}
+            <style>
+                body { margin: 0; overflow: hidden; }
+                iframe {
+                    border: none;
+                    width: 100vw;
+                    height: 100vh;
+                }
+            </style>
+        </head>
+        <body>
+            <iframe src="${window.location.href}"></iframe>
+        </body>
+        </html>
+    `);
+
+    newTab.document.close();
+    
+    // Optional: Redirect the original, unconcealed tab to Google so it looks like you were just searching
+    // window.location.replace('https://www.google.com'); 
 };
 </script>
 </body>
