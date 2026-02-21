@@ -9,17 +9,11 @@
 <html lang="en-us">
 <head>
     <title>Home - Google Drive</title>
-    
     <link rel="icon" type="image/x-icon" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-    
     <link rel="icon" type="image/png" sizes="32x32" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-    
     <link rel="apple-touch-icon" sizes="180x180" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
     
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Google Drive">
-
     <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@master/ultrakill/">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -73,7 +67,7 @@
 
 <body>
     <div class="floating-controls">
-        <a href="index.html" class="float-btn">Home</a>
+        <button class="float-btn" onclick="goHome()">Home</button>
         <button class="float-btn" onclick="openFullscreen()">Fullscreen</button>
     </div>
 
@@ -84,8 +78,17 @@
     <script>
         var canvas = document.querySelector("#unity-canvas");
 
+        // ESCAPE FUNCTION: Forces navigation back to your root directory
+        function goHome() {
+            // This takes the base URL of your site (Vercel/Github) and adds index.html
+            // effectively ignoring the JSdelivr base tag.
+            window.location.href = window.location.origin + "/index.html";
+        }
+
         function openFullscreen() {
             if (canvas.requestFullscreen) {
+                canvas.width = window.screen.width;
+                canvas.height = window.screen.height;
                 canvas.requestFullscreen();
             } else if (canvas.webkitRequestFullscreen) {
                 canvas.webkitRequestFullscreen();
