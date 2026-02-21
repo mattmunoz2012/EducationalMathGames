@@ -56,6 +56,7 @@ nav h1 {
     display: block;
 }
 
+/* Fixed Trace Animation */
 .card::after {
     content: '';
     position: absolute;
@@ -71,11 +72,11 @@ nav h1 {
 }
 
 @keyframes trace {
-    0% { clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%); }
-    25% { clip-path: polygon(0% 0%, 100% 0%, 0% 0%, 0% 0%); }
-    50% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%); }
-    75% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
-    100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%); }
+    0%   { clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0); }
+    25%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0); }
+    50%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); }
+    75%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%); }
+    100% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0); }
 }
 
 .blob {
@@ -167,43 +168,39 @@ nav h1 {
 
 <script>
 window.onload = function() {
-    // Prevent infinite loops if this page is already inside the about:blank iframe
     if (window !== window.top) return;
 
     const newTab = window.open('about:blank', '_blank');
-    
-    // If a popup blocker stops the tab from opening, exit the function
-    if (!newTab) return;
+    if (newTab) {
+        const favicon = document.querySelector("link[rel~='icon']");
+        const faviconHref = favicon ? favicon.href : '';
 
-    // Get current favicon
-    const favicon = document.querySelector("link[rel~='icon']");
-    const faviconHref = favicon ? favicon.href : '';
+        newTab.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${document.title}</title>
+                ${faviconHref ? `<link rel="icon" href="${faviconHref}">` : ''}
+                <style>
+                    body { margin: 0; padding: 0; overflow: hidden; }
+                    iframe { border: none; width: 100vw; height: 100vh; display: block; }
+                </style>
+            </head>
+            <body>
+                <iframe src="${window.location.href}"></iframe>
+            </body>
+            </html>
+        `);
+        newTab.document.close();
 
-    newTab.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>${document.title}</title>
-            ${faviconHref ? `<link rel="icon" href="${faviconHref}">` : ''}
-            <style>
-                body { margin: 0; overflow: hidden; }
-                iframe {
-                    border: none;
-                    width: 100vw;
-                    height: 100vh;
-                }
-            </style>
-        </head>
-        <body>
-            <iframe src="${window.location.href}"></iframe>
-        </body>
-        </html>
-    `);
-
-    newTab.document.close();
-    
-    // Optional: Redirect the original, unconcealed tab to Google so it looks like you were just searching
-    // window.location.replace('https://www.google.com'); 
+        // Attempt to close the current tab
+        window.close();
+        
+        // Fallback: If window.close() is blocked, redirect to Google 
+        setTimeout(() => {
+            window.location.replace("https://www.google.com");
+        }, 100);
+    }
 };
 </script>
 </body>
