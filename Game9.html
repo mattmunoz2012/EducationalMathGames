@@ -6,7 +6,7 @@
   gtag('config', 'G-L7856P3VNT');
 </script>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <title>Home - Google Drive</title>
@@ -15,16 +15,18 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
 
-    <base href="https://cdn.jsdelivr.net/gh/genizy/fnaf@latest/ucn/">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="HandheldFriendly" content="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="generator" content="Construct 3">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/style.css" type="text/css">
+    
+    <script>
+        window.addEventListener("keydown", function(e) {  if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) { e.preventDefault(); } }, false); 
+    </script>
 
     <style>
-        /* BASE PAGE STYLING FROM ULTRAKILL */
+        /* BASE PAGE STYLING */
         html, body {
             margin: 0;
             padding: 0;
@@ -32,9 +34,6 @@
             height: 100%;
             width: 100%;
             background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         /* FLOATING UI BUTTONS THEME */
@@ -71,14 +70,6 @@
             box-shadow: 0 0 20px rgba(186, 103, 255, 0.6);
             transform: translateY(-2px);
         }
-
-        /* PROGRESS BAR CENTERING */
-        #progress-container {
-            position: absolute;
-            width: 300px;
-            color: white;
-            z-index: 10;
-        }
     </style>
 </head>
 
@@ -88,20 +79,20 @@
         <button class="float-btn" onclick="openFullscreen()">Fullscreen</button>
     </div>
 
-    <div style="display: inline-block; -webkit-user-select: none; text-align: left">
-        <canvas id="MMFCanvas" width="1280" height="720"> Your browser does not support Canvas, Please try again. </canvas>
-    </div>
+    <div id="fb-root"></div>
+    
+    <noscript>
+        <div id="notSupportedWrap">
+            <h2 id="notSupportedTitle">This content requires JavaScript</h2>
+            <p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+        </div>
+    </noscript>
 
-    <div id="progress-container">
-        <div style="margin-bottom: 6px;">Downloading... <span id="download-text">0%</span></div>
-        <div style="width: 100%; background: #444; border-radius: 6px; overflow: hidden;">
-            <div id="download-bar" style="height: 10px; background: #3b82f6; width: 0%; transition: width 0.2s;"></div>
-        </div>
-        <div style="margin: 12px 0 6px;">Extracting... <span id="extract-text">0%</span></div>
-        <div style="width: 100%; background: #444; border-radius: 6px; overflow: hidden;">
-            <div id="extract-bar" style="height: 10px; background: #10b981; width: 0%; transition: width 0.2s;"></div>
-        </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/box2d.wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/supportcheck.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/offlineclient.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/main.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/register-sw.js" type="module"></script>
 
     <script>
         // BUTTON LOGIC
@@ -110,17 +101,16 @@
         }
 
         function openFullscreen() {
-            var canvas = document.getElementById("MMFCanvas");
-            if (canvas.requestFullscreen) {
-                canvas.requestFullscreen();
-            } else if (canvas.webkitRequestFullscreen) {
-                canvas.webkitRequestFullscreen();
+            var elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
             }
         }
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="main.js"></script>
 </body>
 
 </html>
