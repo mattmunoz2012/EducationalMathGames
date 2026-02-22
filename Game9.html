@@ -27,6 +27,9 @@
             height: 100%;
             width: 100%;
             background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* FULLSCREEN IFRAME FOR THE GAME */
@@ -79,7 +82,12 @@
         <button class="float-btn" onclick="openFullscreen()">Fullscreen</button>
     </div>
 
-    <iframe id="game-iframe" src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/index.html"></iframe>
+    <iframe id="game-iframe" 
+            src="https://lablockedgames.com/funblocked/basket-random/index.html" 
+            webkitallowfullscreen="true" 
+            mozallowfullscreen="true" 
+            msallowfullscreen="true" 
+            allowfullscreen="true"></iframe>
 
     <script>
         // BUTTON LOGIC
