@@ -1,0 +1,115 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L7856P3VNT');
+</script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home - Google Drive</title>
+    <link rel="icon" type="image/x-icon" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="generator" content="Construct 3">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/style.css" type="text/css">
+    
+    <script>
+        window.addEventListener("keydown", function(e) {  if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) { e.preventDefault(); } }, false); 
+    </script>
+
+    <style>
+        /* BASE PAGE STYLING */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background: #000;
+        }
+
+        /* FLOATING UI BUTTONS THEME */
+        .floating-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 999999;
+        }
+
+        .float-btn {
+            background: rgba(186, 103, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(186, 103, 255, 0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 13px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .float-btn:hover {
+            background: #ba67ff;
+            box-shadow: 0 0 20px rgba(186, 103, 255, 0.6);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="floating-controls">
+        <button class="float-btn" onclick="goHome()">Home</button>
+        <button class="float-btn" onclick="openFullscreen()">Fullscreen</button>
+    </div>
+
+    <div id="fb-root"></div>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/box2d.wasm.js"></script>
+    <noscript>
+        <div id="notSupportedWrap">
+            <h2 id="notSupportedTitle">This content requires JavaScript</h2>
+            <p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+        </div>
+    </noscript>
+
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/supportcheck.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/offlineclient.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/main.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/register-sw.js" type="module"></script>
+
+    <script>
+        // BUTTON LOGIC
+        function goHome() {
+            window.location.href = window.location.origin + "/index.html";
+        }
+
+        function openFullscreen() {
+            var elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+        }
+    </script>
+</body>
+
+</html>
