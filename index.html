@@ -1,249 +1,116 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L7856P3VNT');
+</script>
 <!DOCTYPE html>
-<html data-cloaked="false">
+<html>
+
 <head>
-<title>Home - Google Drive</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <title>Home - Google Drive</title>
+    <link rel="icon" type="image/x-icon" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
 
-<style>
-:root {
-    --glass-bg: rgba(45, 15, 66, 0.3);
-    --glass-border: rgba(186, 103, 255, 0.2);
-    --accent-purple: #ba67ff;
-    --star-color: #ffffff;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="generator" content="Construct 3">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/style.css" type="text/css">
+    
+    <script>
+        window.addEventListener("keydown", function(e) {  if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) { e.preventDefault(); } }, false); 
+    </script>
 
-body {
-    margin: 0;
-    background: #000;
-    color: white;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    text-align: center;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
+    <style>
+        /* BASE PAGE STYLING */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background: #000;
+        }
 
-/* Dynamic Starfield Background */
-.stars-container {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-    background: radial-gradient(circle at center, #1a0b2e 0%, #000 100%);
-}
+        /* FLOATING UI BUTTONS THEME */
+        .floating-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 999999;
+        }
 
-.star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.5;
-    animation: twinkle var(--duration) infinite ease-in-out;
-}
+        .float-btn {
+            background: rgba(186, 103, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(186, 103, 255, 0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 13px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
 
-@keyframes twinkle {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
-
-/* Navbar */
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    background: rgba(15, 5, 25, 0.6);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav h1 {
-    margin: 0;
-    letter-spacing: 15px;
-    font-size: 32px;
-    font-weight: 900;
-    background: linear-gradient(to bottom, #fff, var(--accent-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-transform: uppercase;
-}
-
-/* Grid Layout */
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    gap: 30px;
-}
-
-/* Game Cards */
-.card {
-    position: relative;
-    aspect-ratio: 1/1;
-    background: var(--glass-bg);
-    border-radius: 28px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid var(--glass-border);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0; left: 0;
-    z-index: 1;
-    transition: transform 0.5s ease;
-}
-
-/* NEW: Purple Glass UI Label for Game Names */
-.card-label {
-    position: absolute;
-    bottom: 15px;
-    width: 80%;
-    background: rgba(20, 5, 35, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--accent-purple);
-    padding: 8px 5px;
-    border-radius: 12px;
-    color: white;
-    font-size: 11px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    z-index: 5;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    transition: all 0.3s ease;
-}
-
-.card:hover .card-label {
-    background: var(--accent-purple);
-    color: black;
-    box-shadow: 0 0 20px var(--accent-purple);
-}
-
-.card img[src=""], .card img:not([src]) { display: none; }
-
-.card:hover img { transform: scale(1.1); }
-
-.card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-purple);
-    box-shadow: 0 0 30px rgba(186, 103, 255, 0.3);
-}
-
-/* Blob effect */
-.blob {
-    width: 60px;
-    height: 60px;
-    background: var(--accent-purple);
-    border-radius: 50%;
-    filter: blur(25px);
-    opacity: 0.4;
-    animation: pulse 4s infinite ease-in-out;
-    z-index: 0;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.4; }
-    50% { transform: scale(1.5); opacity: 0.6; }
-}
-
-/* Ownership & Footer */
-.ownership { margin-top: 50px; color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 2px; }
-.owner-name { display: inline-block; margin-top: 10px; padding: 10px 25px; border-radius: 50px; color: white; font-weight: bold; background: rgba(186, 103, 255, 0.1); border: 1px solid var(--accent-purple); box-shadow: 0 0 15px rgba(186, 103, 255, 0.4); }
-footer { padding: 40px; color: #333; font-size: 11px; }
-</style>
+        .float-btn:hover {
+            background: #ba67ff;
+            box-shadow: 0 0 20px rgba(186, 103, 255, 0.6);
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 
 <body>
-<div class="stars-container" id="stars"></div>
+    <div class="floating-controls">
+        <button class="float-btn" onclick="goHome()">Home</button>
+        <button class="float-btn" onclick="openFullscreen()">Fullscreen</button>
+    </div>
 
-<nav>
-    <h1>MONO</h1>
-</nav>
+    <div id="fb-root"></div>
+    
+    <noscript>
+        <div id="notSupportedWrap">
+            <h2 id="notSupportedTitle">This content requires JavaScript</h2>
+            <p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+        </div>
+    </noscript>
 
-<div class="container">
-    <a href="Game1.html" class="card">
-        <img src="https://m.media-amazon.com/images/M/MV5BNGIyZDE4OTYtNjBhOS00NzFkLTkyYWMtYzAzNWUxZThmMDBlXkEyXkFqcGc@._V1_.jpg">
-        <div class="card-label">ULTRAKILL</div>
-        <div class="blob"></div>
-    </a>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/box2d.wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/supportcheck.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/offlineclient.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/main.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@1520d90d7b2994737acd8f7a633d018f63c22ca7/scripts/register-sw.js" type="module"></script>
 
-    <a href="Game2.html" class="card">
-        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/319510/ss_b5bf2127754d4e9bf6ab1c94e599d47f93a6708a.1920x1080.jpg?t=1666889251">
-        <div class="card-label">Five Nights At Freddy's 1</div>
-        <div class="blob"></div>
-    </a>
-
-    <a href="Game3.html" class="card">
-        <img src="https://m.media-amazon.com/images/I/81HBpJd2h8L.png">
-        <div class="card-label">Five Nights at Freddy's 2</div>
-        <div class="blob"></div>
-    </a>
-
-    <a href="Game4.html" class="card"><img src="https://cdn.now.gg/apps-content/com.nowgg.h5.pub501.app51769/icon/five-nights-at-freddy-s-3.png"><div class="card-label">Five Nights at Freddy's 3</div><div class="blob"></div></a>
-    <a href="Game5.html" class="card"><img src="https://i.redd.it/qrro4l2tfecz.png"><div class="card-label">Five Nights At Freddy's 4</div><div class="blob"></div></a>
-    <a href="Game6.html" class="card"><img src="https://m.media-amazon.com/images/M/MV5BNDI0NjI3ZDktZDVhNy00YzM0LWJhNjEtZDJiYjc0MTE4YmJkXkEyXkFqcGc@._V1_.jpg"><div class="card-label">FNaF World</div><div class="blob"></div></a>
-    <a href="Game7.html" class="card"><img src="https://m.media-amazon.com/images/M/MV5BMTljNGY1ZjMtNzUyYi00NWFkLWFmOTQtYWY2YWNhN2U3MzM0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"><div class="card-label">Five Nights at Freddy's: Sister Location</div><div class="blob"></div></a>
-    <a href="Game8.html" class="card"><img src="https://play-lh.googleusercontent.com/zDcOTck_4ZjLeJNgil4bpIXUefRUYVqOqlpc8hxeDby8LQh0eZhYDho9U3W_RVg9yuE"><div class="card-label">Freddy Fazbear's Pizzeria Simulator</div><div class="blob"></div></a>
-    <a href="Game9.html" class="card"><img src="https://play-lh.googleusercontent.com/pB7dsLLcRgADtFpEPeKc5mSyAn1E1JzrdQ1V7-Y5hizgub3G8e9UJIc5opC9mYXKSBw"><div class="card-label">Ultimate Custom Night</div><div class="blob"></div></a>
-    <a href="Game10.html" class="card"><img src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&amp;quality=100&amp;metadata=none&amp;width=1200"><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
-</div>
-
-<div class="ownership">CURATED BY<br><span class="owner-name">Matthew M</span></div>
-
-<footer>© 2026 Home - Google Drive</footer>
-
-<script>
-// Star Generator
-const starsContainer = document.getElementById('stars');
-for (let i = 0; i < 150; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 3 + 'px';
-    star.style.width = size;
-    star.style.height = size;
-    star.style.top = Math.random() * 100 + '%';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-    starsContainer.appendChild(star);
-}
-
-// Cloak Script
-(function() {
-    if (window.name === 'cloaked_tab' || document.documentElement.getAttribute('data-cloaked') === 'true') return;
-    window.onload = function() {
-        const newTab = window.open('about:blank', 'cloaked_tab');
-        if (newTab) {
-            document.documentElement.setAttribute('data-cloaked', 'true');
-            newTab.document.open();
-            newTab.document.write(document.documentElement.outerHTML);
-            newTab.document.close();
-            window.location.replace("https://drive.google.com");
+    <script>
+        // BUTTON LOGIC
+        function goHome() {
+            window.location.href = window.location.origin + "/index.html";
         }
-    };
-})();
-</script>
+
+        function openFullscreen() {
+            var elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+        }
+    </script>
 </body>
+
 </html>
