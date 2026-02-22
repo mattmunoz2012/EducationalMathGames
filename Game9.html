@@ -27,19 +27,16 @@
             height: 100%;
             width: 100%;
             background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* FULLSCREEN IFRAME FOR THE GAME */
-        #game-iframe {
+        /* FULLSCREEN IFRAME */
+        iframe {
             width: 100vw;
             height: 100vh;
             border: none;
         }
 
-        /* FLOATING UI BUTTONS THEME */
+        /* FLOATING UI BUTTONS */
         .floating-controls {
             position: fixed;
             bottom: 20px;
@@ -82,27 +79,21 @@
         <button class="float-btn" onclick="openFullscreen()">Fullscreen</button>
     </div>
 
-    <iframe id="game-iframe" 
-            src="https://lablockedgames.com/funblocked/basket-random/index.html" 
-            webkitallowfullscreen="true" 
-            mozallowfullscreen="true" 
-            msallowfullscreen="true" 
-            allowfullscreen="true"></iframe>
+    <iframe id="game-iframe" src="https://lablockedgames.com/funblocked/basket-random/index.html"></iframe>
 
     <script>
-        // BUTTON LOGIC
         function goHome() {
             window.location.href = window.location.origin + "/index.html";
         }
 
         function openFullscreen() {
-            var iframe = document.getElementById("game-iframe");
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.webkitRequestFullscreen) {
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) {
-                iframe.msRequestFullscreen();
+            var elem = document.getElementById("game-iframe");
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
             }
         }
     </script>
