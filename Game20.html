@@ -8,50 +8,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home - Google Drive</title>
-    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-
     <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@de75523557e46f375fc9173a9a0c0d34d8ed34f9/thats-not-my-neighbor/">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <title>That's not my neighbor</title>
     <style>
-        :root { --accent-purple: #ba67ff; }
-        body { margin: 0; background: #000; overflow: hidden; font-family: sans-serif; }
-        #canvas { display: block; margin: 0 auto; color: white; }
-        .ui-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 9999; }
-        .btn { background: rgba(186,103,255,0.2); border: 1px solid var(--accent-purple); color: white; padding: 10px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 12px; backdrop-filter: blur(10px); transition: 0.3s; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-        .btn:hover { background: var(--accent-purple); box-shadow: 0 0 20px rgba(186,103,255,0.6); transform: translateY(-2px); }
+        .ui-controls { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .btn { background: #333; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 5px; display: flex; align-items: center; gap: 5px; font-family: sans-serif; }
     </style>
 </head>
 <body>
-    <script src="main.js"></script>
-    <div id="loading-text" style="color: white; font-family: cursive; font-size: 48px; text-align: center; margin-top: 20px;">LOADING...</div>
-    <canvas id="canvas"></canvas>
-    
-    <div id="status">
-        <img id="status-splash" src="thats-not-my-neighbor.png" style="display:none">
-        <progress id="status-progress"></progress>
-    </div>
-
     <div class="ui-controls">
-        <a href="index.html" class="btn" onclick="event.preventDefault(); window.location.href='index.html';">
+        <a href="#" class="btn" onclick="event.preventDefault(); window.location.assign(window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/index.html');">
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L8.707 1.5Z"/></svg>
             Home
         </a>
-        <button class="btn" onclick="document.querySelector('#canvas').requestFullscreen()">Fullscreen</button>
     </div>
-
-    <script src="thats-not-my-neighbor.js"></script>
-    <script>
-        const GODOT_CONFIG = { "args": [], "canvasResizePolicy": 2, "executable": "thats-not-my-neighbor", "fileSizes": { "thats-not-my-neighbor.pck": 410934256, "thats-not-my-neighbor.wasm": 43444261 }, "focusCanvas": true };
-        const engine = new Engine(GODOT_CONFIG);
-        engine.startGame({
-            'onProgress': (c, t) => { document.querySelector("#status-progress").value = c; document.querySelector("#status-progress").max = t; }
-        }).then(() => { 
-            document.querySelector("#status").remove(); 
-            document.querySelector("#loading-text").remove();
-        });
-    </script>
-</body>
+    <script src="main.js"></script>
+    <div id="loading-text" style="color: white; font-family: cursive; font-size: 48px; text-align: center; margin-top: 20px;">LOADING...</div>
+    </body>
 </html>
