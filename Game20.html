@@ -6,25 +6,27 @@
   gtag('config', 'G-L7856P3VNT');
 </script>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@de75523557e46f375fc9173a9a0c0d34d8ed34f9/thats-not-my-neighbor/">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <title>That's not my neighbor</title>
     <style>
         .ui-controls { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        .btn { background: #333; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 5px; display: flex; align-items: center; gap: 5px; font-family: sans-serif; }
+        .btn { background: #333; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-family: sans-serif; }
     </style>
 </head>
 <body>
-    <div class="ui-controls">
-        <a href="#" class="btn" onclick="event.preventDefault(); window.location.assign(window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/index.html');">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L8.707 1.5Z"/></svg>
-            Home
-        </a>
-    </div>
+    <div class="ui-controls"><a href="#" class="btn" onclick="event.preventDefault(); window.location.assign(window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/index.html');">Home</a></div>
     <script src="main.js"></script>
-    <div id="loading-text" style="color: white; font-family: cursive; font-size: 48px; text-align: center; margin-top: 20px;">LOADING...</div>
-    </body>
+    <canvas id="canvas"></canvas>
+    <div id="status"><progress id="status-progress"></progress></div>
+    <script src="thats-not-my-neighbor.js"></script>
+    <script>
+        const engine = new Engine({
+            "executable": "thats-not-my-neighbor",
+            "fileSizes": { "thats-not-my-neighbor.pck": 410934256, "thats-not-my-neighbor.wasm": 43444261 }
+        });
+        engine.startGame();
+    </script>
+</body>
 </html>
