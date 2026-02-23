@@ -1,0 +1,213 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L7856P3VNT');
+</script>
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Home - Google Drive</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ranny31ranny/5471@main/TemplateData/style.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ranny31ranny/5471@main/v2.79e5f6f6325b0faa1b66.js"></script>
+
+    <style>
+        :root {
+            --accent-purple: #ba67ff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        #unity-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        #unity-loading-bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--accent-purple);
+            border-radius: 10px;
+            display: none; /* Controlled by script */
+            z-index: 10;
+        }
+
+        #unity-progress-bar-full {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--accent-purple);
+            box-shadow: 0 0 15px var(--accent-purple);
+            border-radius: 8px;
+            transition: width 0.3s ease;
+        }
+
+        /* Floating Purple UI Buttons */
+        .ui-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 9999;
+        }
+
+        .btn {
+            background: rgba(186, 103, 255, 0.2);
+            border: 1px solid var(--accent-purple);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(186, 103, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        #unity-warning {
+            position: absolute;
+            left: 50%;
+            top: 5%;
+            transform: translate(-50%);
+            background: white;
+            padding: 10px;
+            display: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="unity-container">
+        <canvas id="unity-canvas"></canvas>
+        <div id="unity-loading-bar">
+            <div id="unity-logo"></div>
+            <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+        </div>
+        <div id="unity-warning"></div>
+    </div>
+
+    <div class="ui-controls">
+        <a href="index.html" class="btn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L8.707 1.5Z"/></svg>
+            Home
+        </a>
+        <button class="btn" onclick="toggleFullScreen()">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10.5 1a.5.5 0 0 1 0-1h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4zM1.5 10.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm14.5 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/></svg>
+            Fullscreen
+        </button>
+    </div>
+
+    <script>
+        // ORIGINAL GRANNY 3 LOGIC
+        YaGames.init().then(ysdk => {
+            window.ysdk = ysdk;
+            ysdk.getPlayer({ scopes: false }).then(_player => { window.player = _player; });
+        });
+
+        var container = document.querySelector("#unity-container");
+        var canvas = document.querySelector("#unity-canvas");
+        var loadingBar = document.querySelector("#unity-loading-bar");
+        var progressBarFull = document.querySelector("#unity-progress-bar-full");
+        var buildUrl = "https://cdn.jsdelivr.net/gh/ranny31ranny/5471@main/Build";
+        var loaderUrl = buildUrl + "/bb0d9ecdb05db3e84da20bd14a4f84dc.loader.js";
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        async function mergeFiles(fileParts) {
+            let buffers = [];
+            for (let part of fileParts) {
+                const response = await fetch(part);
+                const data = await response.arrayBuffer();
+                buffers.push(data);
+            }
+            return URL.createObjectURL(new Blob(buffers));
+        }
+
+        const wasmParts = [
+            buildUrl + "/bd8d511ba06d09159c93b032551b04fb.wasm.part0",
+            buildUrl + "/bd8d511ba06d09159c93b032551b04fb.wasm.part1",
+            buildUrl + "/bd8d511ba06d09159c93b032551b04fb.wasm.part2"
+        ];
+
+        const dataParts = [
+            buildUrl + "/fef8fdd7cfc9e5a5001034b01fa3647b.data.part0",
+            buildUrl + "/fef8fdd7cfc9e5a5001034b01fa3647b.data.part1"
+        ];
+
+        Promise.all([mergeFiles(wasmParts), mergeFiles(dataParts)]).then(([wasmUrl, dataUrl]) => {
+            var config = {
+                dataUrl: dataUrl,
+                frameworkUrl: buildUrl + "/e12dac5a3f5e3f677b009118afef20b7.framework.js",
+                codeUrl: wasmUrl,
+                streamingAssetsUrl: "StreamingAssets",
+                companyName: "Games Place",
+                productName: "Granny 3",
+                productVersion: "0.1",
+                showBanner: (msg, type) => { console.log(msg); },
+            };
+
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            loadingBar.style.display = "block";
+
+            var script = document.createElement("script");
+            script.src = loaderUrl;
+            script.onload = () => {
+                createUnityInstance(canvas, config, (progress) => {
+                    progressBarFull.style.width = 100 * progress + "%";
+                }).then((unityInstance) => {
+                    window.myGameInstance = unityInstance;
+                    loadingBar.style.display = "none";
+                }).catch((message) => { alert(message); });
+            };
+            document.body.appendChild(script);
+        });
+    </script>
+</body>
+</html>
