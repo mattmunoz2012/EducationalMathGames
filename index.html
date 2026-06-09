@@ -1,250 +1,816 @@
 <!DOCTYPE html>
-<html data-cloaked="false">
+<html lang="en">
 <head>
-<title>Home - Google Drive</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt's Skincare Routine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-    --glass-bg: rgba(45, 15, 66, 0.3);
-    --glass-border: rgba(186, 103, 255, 0.2);
-    --accent-purple: #ba67ff;
-    --star-color: #ffffff;
+  --bg:      #0e0e12;
+  --surface: #16161d;
+  --card:    #1c1c26;
+  --card2:   #202030;
+  --border:  #2a2a38;
+  --gold:    #c9a84c;
+  --golddim: #7a5f28;
+  --text:    #e8e8f0;
+  --dim:     #8888a0;
+  --muted:   #484860;
+  --am:      #e8a44a;
+  --bp:      #d96b7a;
+  --gly:     #5b9fd6;
+  --rest:    #9b87c8;
+  --skip:    #333348;
 }
 
 body {
-    margin: 0;
-    background: #000;
-    color: white;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    text-align: center;
-    min-height: 100vh;
-    overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  padding: 28px 14px 70px;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
-/* Dynamic Starfield Background */
-.stars-container {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-    background: radial-gradient(circle at center, #1a0b2e 0%, #000 100%);
-}
+/* ── HEADER ── */
+.header { text-align: center; margin-bottom: 30px; }
+.eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.header h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--text); line-height: 1.1; }
+.header h1 span { color: var(--gold); }
+.header-sub { margin-top: 8px; font-size: 12px; color: var(--dim); }
+.rule { width: 40px; height: 1px; background: var(--golddim); margin: 14px auto 0; }
 
-.star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.5;
-    animation: twinkle var(--duration) infinite ease-in-out;
-}
+/* ── LEGEND ── */
+.legend { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 28px; }
+.leg { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--dim); background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; }
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
-@keyframes twinkle {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
+/* ── SECTION DIVIDER ── */
+.sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; margin: 32px 0 14px; }
+.sec-label::after { content:''; flex:1; height:1px; background: var(--border); }
 
-/* Navbar */
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    background: rgba(15, 5, 25, 0.6);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+/* ── SWIPE HINT ── */
+.swipe-hint { text-align: center; font-size: 10px; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.05em; }
 
-nav h1 {
-    margin: 0;
-    letter-spacing: 15px;
-    font-size: 32px;
-    font-weight: 900;
-    background: linear-gradient(to bottom, #fff, var(--accent-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-transform: uppercase;
-}
+/* ── SCROLL ROW ── */
+.scroll-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.scroll-row::-webkit-scrollbar { height: 3px; }
+.scroll-row::-webkit-scrollbar-track { background: var(--border); border-radius: 2px; }
+.scroll-row::-webkit-scrollbar-thumb { background: var(--golddim); border-radius: 2px; }
 
-/* Grid Layout */
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    gap: 30px;
-}
+/* ── DAY CARD ── */
+.day-card { flex: 0 0 300px; scroll-snap-align: start; background: var(--card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
 
-/* Game Cards */
-.card {
-    position: relative;
-    aspect-ratio: 1/1;
-    background: var(--glass-bg);
-    border-radius: 28px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid var(--glass-border);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
+/* Day header */
+.day-header { padding: 14px 16px 12px; }
+.day-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.day-name { font-size: 18px; font-weight: 700; }
+.night-pill { font-size: 9px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
 
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0; left: 0;
-    z-index: 1;
-    transition: transform 0.5s ease;
-}
+/* night type colours */
+.bp-theme   .day-name { color: var(--bp); }
+.bp-theme   .night-pill { background: rgba(217,107,122,0.18); color: var(--bp); }
+.bp-theme   { border-top: 3px solid var(--bp); }
 
-/* NEW: Purple Glass UI Label for Game Names */
-.card-label {
-    position: absolute;
-    bottom: 15px;
-    width: 80%;
-    background: rgba(20, 5, 35, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--accent-purple);
-    padding: 8px 5px;
-    border-radius: 12px;
-    color: white;
-    font-size: 11px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    z-index: 5;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    transition: all 0.3s ease;
-}
+.gly-theme  .day-name { color: var(--gly); }
+.gly-theme  .night-pill { background: rgba(91,159,214,0.18); color: var(--gly); }
+.gly-theme  { border-top: 3px solid var(--gly); }
 
-.card:hover .card-label {
-    background: var(--accent-purple);
-    color: black;
-    box-shadow: 0 0 20px var(--accent-purple);
-}
+.rest-theme .day-name { color: var(--rest); }
+.rest-theme .night-pill { background: rgba(155,135,200,0.18); color: var(--rest); }
+.rest-theme { border-top: 3px solid var(--rest); }
 
-.card img[src=""], .card img:not([src]) { display: none; }
+.day-desc { font-size: 11px; color: var(--dim); font-weight: 300; line-height: 1.5; }
 
-.card:hover img { transform: scale(1.1); }
+/* ── ROUTINE BLOCK (AM or PM) ── */
+.routine-block { padding: 14px 16px; }
+.routine-block + .routine-block { border-top: 1px solid var(--border); }
 
-.card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-purple);
-    box-shadow: 0 0 30px rgba(186, 103, 255, 0.3);
-}
+.block-title { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.block-title.am-title { color: var(--am); }
+.block-title.pm-title-bp  { color: var(--bp); }
+.block-title.pm-title-gly { color: var(--gly); }
+.block-title.pm-title-rest{ color: var(--rest); }
 
-/* Blob effect */
-.blob {
-    width: 60px;
-    height: 60px;
-    background: var(--accent-purple);
-    border-radius: 50%;
-    filter: blur(25px);
-    opacity: 0.4;
-    animation: pulse 4s infinite ease-in-out;
-    z-index: 0;
-}
+/* ── STEP ROW ── */
+.step { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; background: var(--card2); border-radius: 10px; margin-bottom: 7px; border-left: 3px solid transparent; }
+.step:last-child { margin-bottom: 0; }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.4; }
-    50% { transform: scale(1.5); opacity: 0.6; }
-}
+.step.am-step   { border-left-color: var(--am); }
+.step.bp-step   { border-left-color: var(--bp); }
+.step.gly-step  { border-left-color: var(--gly); }
+.step.rest-step { border-left-color: var(--rest); }
+.step.skip-step { border-left-color: var(--skip); background: transparent; border: 1px dashed var(--skip); opacity: 0.5; }
 
-/* Ownership & Footer */
-.ownership { margin-top: 50px; color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 2px; }
-.owner-name { display: inline-block; margin-top: 10px; padding: 10px 25px; border-radius: 50px; color: white; font-weight: bold; background: rgba(186, 103, 255, 0.1); border: 1px solid var(--accent-purple); box-shadow: 0 0 15px rgba(186, 103, 255, 0.4); }
-footer { padding: 40px; color: #333; font-size: 11px; }
+.step-left { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+.step-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.num-am   { background: rgba(232,164,74,0.2);  color: var(--am); }
+.num-bp   { background: rgba(217,107,122,0.2); color: var(--bp); }
+.num-gly  { background: rgba(91,159,214,0.2);  color: var(--gly); }
+.num-rest { background: rgba(155,135,200,0.2); color: var(--rest); }
+.num-gold { background: rgba(201,168,76,0.2);  color: var(--gold); }
+.num-skip { background: var(--skip); color: var(--muted); }
+
+.step-emoji { font-size: 18px; line-height: 1; }
+
+.step-body { flex: 1; min-width: 0; }
+.step-product { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 2px; }
+.step-brand   { font-size: 10px; color: var(--dim); font-weight: 500; margin-bottom: 3px; }
+.step-how     { font-size: 10px; color: var(--dim); font-weight: 300; line-height: 1.5; }
+.step-why     { font-size: 10px; color: var(--dim); font-weight: 300; line-height: 1.5; margin-top: 3px; font-style: italic; }
+.step-warning { font-size: 10px; color: #d9a84a; font-weight: 600; margin-top: 4px; }
+
+.skip-label { font-size: 11px; color: var(--muted); font-weight: 500; }
+.skip-reason { font-size: 10px; color: var(--muted); font-weight: 300; margin-top: 2px; }
+
+/* ── RULES ── */
+.rules-list { display: flex; flex-direction: column; gap: 10px; }
+.rule-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; }
+.rule-icon { font-size: 22px; flex-shrink: 0; }
+.rule-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.rule-body  { font-size: 11px; color: var(--dim); font-weight: 300; line-height: 1.6; }
+
+.footer { text-align: center; margin-top: 40px; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
 </style>
 </head>
-
 <body>
-<div class="stars-container" id="stars"></div>
 
-<nav>
-    <h1>MONO</h1>
-</nav>
-
-<div class="container">
-    <a href="Game1.html" class="card">
-        <img src="https://m.media-amazon.com/images/M/MV5BNGIyZDE4OTYtNjBhOS00NzFkLTkyYWMtYzAzNWUxZThmMDBlXkEyXkFqcGc@._V1_.jpg">
-        <div class="card-label">ULTRAKILL</div>
-        <div class="blob"></div>
-    </a>
-
-    <a href="Game2.html" class="card">
-        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/319510/ss_b5bf2127754d4e9bf6ab1c94e599d47f93a6708a.1920x1080.jpg?t=1666889251">
-        <div class="card-label">Five Nights At Freddy's 1</div>
-        <div class="blob"></div>
-    </a>
-
-    <a href="Game3.html" class="card">
-        <img src="https://m.media-amazon.com/images/I/81HBpJd2h8L.png">
-        <div class="card-label">Five Nights at Freddy's 2</div>
-        <div class="blob"></div>
-    </a>
-
-    <a href="Game4.html" class="card"><img src="https://cdn.now.gg/apps-content/com.nowgg.h5.pub501.app51769/icon/five-nights-at-freddy-s-3.png"><div class="card-label">Five Nights at Freddy's 3</div><div class="blob"></div></a>
-    <a href="Game5.html" class="card"><img src="https://i.redd.it/qrro4l2tfecz.png"><div class="card-label">Five Nights At Freddy's 4</div><div class="blob"></div></a>
-    <a href="Game6.html" class="card"><img src="https://m.media-amazon.com/images/M/MV5BNDI0NjI3ZDktZDVhNy00YzM0LWJhNjEtZDJiYjc0MTE4YmJkXkEyXkFqcGc@._V1_.jpg"><div class="card-label">FNaF World</div><div class="blob"></div></a>
-    <a href="Game7.html" class="card"><img src="https://m.media-amazon.com/images/M/MV5BMTljNGY1ZjMtNzUyYi00NWFkLWFmOTQtYWY2YWNhN2U3MzM0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"><div class="card-label">Five Nights at Freddy's: Sister Location</div><div class="blob"></div></a>
-    <a href="Game8.html" class="card"><img src="https://play-lh.googleusercontent.com/zDcOTck_4ZjLeJNgil4bpIXUefRUYVqOqlpc8hxeDby8LQh0eZhYDho9U3W_RVg9yuE"><div class="card-label">Freddy Fazbear's Pizzeria Simulator</div><div class="blob"></div></a>
-    <a href="Game9.html" class="card"><img src="https://play-lh.googleusercontent.com/pB7dsLLcRgADtFpEPeKc5mSyAn1E1JzrdQ1V7-Y5hizgub3G8e9UJIc5opC9mYXKSBw"><div class="card-label">Ultimate Custom Night</div><div class="blob"></div></a>
-    <a href="Game10.html" class="card"><img src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&amp;quality=100&amp;metadata=none&amp;width=1200"><div class="card-label">Basket Random</div><div class="blob"></div></a>
-    <a href="Game11.html" class="card"><img src="https://imgs.crazygames.com/auto-covers/boxing-random_1x1.jpeg?format=auto&amp;quality=100&amp;metadata=none&amp;width=1200"><div class="card-label">Boxing Random</div><div class="blob"></div></a>
-    <a href="Game12.html" class="card"><img src="https://play-lh.googleusercontent.com/VeKAevaOjPlcyCtOpFY1h6SjwEjnu4ryG3xQ_qw1Muuhrg8pqwhl1aPjWovMkjc0Rc4"><div class="card-label">Vollyball Random</div><div class="blob"></div></a>
-    <a href="Game13.html" class="card"><img src="https://soccerrandom.io/data/image/game/soccer-random.jpeg"><div class="card-label">Soccor Random</div><div class="blob"></div></a>
-    <a href="Game14.html" class="card"><img src="https://play-lh.googleusercontent.com/yT_LBq_tyKeIDohKDsqN_Qt18jGIPUYIxY2C-1-E2YA9Qd60uZW08pua17qBmIiDPA"><div class="card-label">Granny</div><div class="blob"></div></a>
-    <a href="Game15.html" class="card"><img src="https://play-lh.googleusercontent.com/iZ7NP-56YenT2dpgKEAw3n7IKFyu-S_9Iu3ayo28XYTgZpFtxsK_HXltV36pysSJqq8"><div class="card-label">Granny 2</div><div class="blob"></div></a>
-    <a href="Game16.html" class="card"><img src="https://www.gamekarma.com/images/games/1097.png"><div class="card-label">Time Shooter 1</div><div class="blob"></div></a>
-    <a href="Game17.html" class="card"><img src="https://imgs.crazygames.com/time-shooter-2_1x1/20241113040556/time-shooter-2_1x1-cover?format=auto&amp;quality=100&amp;metadata=none&amp;width=1200"><div class="card-label">Time Shooter 2</div><div class="blob"></div></a>
-    <a href="Game18.html" class="card"><img src="https://dordle.io/cache/data/image/time-shooter-3-swat-m200x200.webp"><div class="card-label">Time Shooter 3</div><div class="blob"></div></a>
-    <a href="Game19.html" class="card"><img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co9lxz.jpg"><div class="card-label">R.E.P.O</div><div class="blob"></div></a>
-    <a href="Game20.html" class="card"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3431040/d713591d7029c993a790bfb284f49ca6f1b43b46/capsule_616x353.jpg?t=1763509556"><div class="card-label">Thats Not My Neighbor</div><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+<!-- HEADER -->
+<div class="header">
+  <div class="eyebrow">Personalized Skincare Protocol</div>
+  <h1>Matt's <span>Weekly</span> Routine</h1>
+  <p class="header-sub">8 products · 3 night modes · Zero active-on-active conflicts</p>
+  <div class="rule"></div>
 </div>
 
-<div class="ownership">CURATED BY<br><span class="owner-name">Matthew M</span></div>
+<!-- LEGEND -->
+<div class="legend">
+  <div class="leg"><div class="leg-dot" style="background:var(--am)"></div>AM — Every Day</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--bp)"></div>BP Night (Mon/Wed/Fri)</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--gly)"></div>Glycolic Night (Tue/Thu/Sat)</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--rest)"></div>Rest Night (Sun)</div>
+</div>
 
-<footer>© 2026 Home - Google Drive</footer>
+<!-- ══════ WEEK CARDS ══════ -->
+<div class="sec-label">📅 Full Week — Swipe through each day</div>
+<div class="swipe-hint">← swipe to see all 7 days →</div>
+<div class="scroll-row">
 
-<script>
-// Star Generator
-const starsContainer = document.getElementById('stars');
-for (let i = 0; i < 150; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 3 + 'px';
-    star.style.width = size;
-    star.style.height = size;
-    star.style.top = Math.random() * 100 + '%';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-    starsContainer.appendChild(star);
-}
+  <!-- ════ SUNDAY ════ -->
+  <div class="day-card rest-theme">
+    <div class="day-header">
+      <div class="day-top">
+        <div class="day-name">Sunday</div>
+        <span class="night-pill">😴 Rest Night</span>
+      </div>
+      <div class="day-desc">No actives tonight. Let your skin fully recover from the week. Barrier repair only.</div>
+    </div>
 
-// Cloak Script
-(function() {
-    if (window.name === 'cloaked_tab' || document.documentElement.getAttribute('data-cloaked') === 'true') return;
-    window.onload = function() {
-        const newTab = window.open('about:blank', 'cloaked_tab');
-        if (newTab) {
-            document.documentElement.setAttribute('data-cloaked', 'true');
-            newTab.document.open();
-            newTab.document.write(document.documentElement.outerHTML);
-            newTab.document.close();
-            window.location.replace("https://drive.google.com");
-        }
-    };
-})();
-</script>
+    <div class="routine-block">
+      <div class="block-title am-title">☀️ Morning Routine</div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body">
+          <div class="step-product">Based Daily Facial Cleanser</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Wet face, massage in small circles for 30–60 sec, rinse with lukewarm water. Pat dry — don't rub.</div>
+          <div class="step-why">💡 Why first: Removes overnight oils and dead skin so everything after absorbs properly.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body">
+          <div class="step-product">Skin Revival Spray</div>
+          <div class="step-brand">Based Skincare — Hypochlorous Acid</div>
+          <div class="step-how">📌 How: Hold 6–8 inches from face, mist evenly, let air dry completely (~30 sec). Do NOT rub in.</div>
+          <div class="step-why">💡 Why: Kills bacteria that causes breakouts without stripping your skin. Sets a clean base before moisturizer.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">3</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body">
+          <div class="step-product">Under Eye Elixir</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Use your ring finger (lightest pressure). Gently pat — don't rub or pull — along the under-eye bone.</div>
+          <div class="step-why">💡 Why ring finger: The skin here is the thinnest on your face. Tugging causes wrinkles over time.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">4</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body">
+          <div class="step-product">Daily Facial Moisturizer</div>
+          <div class="step-brand">Based Skincare — Ceramides + Squalane</div>
+          <div class="step-how">📌 How: Pea-sized amount. Warm between fingertips, then press into skin — don't drag across.</div>
+          <div class="step-why">💡 Why: Locks in hydration and rebuilds your skin barrier before SPF goes on top.</div>
+        </div>
+      </div>
+
+      <div class="step am-step" style="border-left-color: var(--gold);">
+        <div class="step-left"><div class="step-num num-gold">5</div><div class="step-emoji">☀️</div></div>
+        <div class="step-body">
+          <div class="step-product">Anthelios Light Fluid SPF 60</div>
+          <div class="step-brand">La Roche-Posay — ALWAYS last step</div>
+          <div class="step-how">📌 How: Nickel-sized amount. Apply to face and neck. Give 1–2 min to set before going outside.</div>
+          <div class="step-why">💡 Why last: SPF needs to sit on top of everything to work. Putting moisturizer over it breaks it down.</div>
+          <div class="step-warning">⚠️ Non-negotiable every single morning — both BP and Glycolic make your skin burn faster in sun.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title pm-title-rest">🌙 Night Routine — Rest</div>
+
+      <div class="step rest-step">
+        <div class="step-left"><div class="step-num num-rest">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body">
+          <div class="step-product">Based Daily Facial Cleanser</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Same as morning. Remove the full day — sweat, SPF, pollution. All of it.</div>
+          <div class="step-why">💡 Why: Sleeping with SPF/pollution on your face clogs pores and causes breakouts overnight.</div>
+        </div>
+      </div>
+
+      <div class="step rest-step">
+        <div class="step-left"><div class="step-num num-rest">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body">
+          <div class="step-product">Skin Revival Spray</div>
+          <div class="step-brand">Based Skincare — Hypochlorous Acid</div>
+          <div class="step-how">📌 How: Mist on clean skin, air dry. This is your toner replacement — no need for separate toner.</div>
+          <div class="step-why">💡 Why: Calms any redness from the day and preps skin to absorb your moisturizer better.</div>
+        </div>
+      </div>
+
+      <div class="step skip-step">
+        <div class="step-left"><div class="step-num num-skip">—</div></div>
+        <div class="step-body">
+          <div class="skip-label">No Actives Tonight</div>
+          <div class="skip-reason">Skipping Lira ICE (BP) and LRP Glycolic Serum. Sunday is your skin's full recovery day — no treatments needed.</div>
+        </div>
+      </div>
+
+      <div class="step rest-step">
+        <div class="step-left"><div class="step-num num-rest">3</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body">
+          <div class="step-product">Under Eye Elixir</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Pat gently under eyes. At night this works harder since skin repairs itself while you sleep.</div>
+        </div>
+      </div>
+
+      <div class="step rest-step">
+        <div class="step-left"><div class="step-num num-rest">4</div><div class="step-emoji">🧈</div></div>
+        <div class="step-body">
+          <div class="step-product">Beef Tallow Moisturizer</div>
+          <div class="step-brand">Based Skincare — Grass-Fed Tallow + Manuka Honey</div>
+          <div class="step-how">📌 How: Warm a small amount between palms, press into face. It's richer than your daily moisturizer — a little goes a long way.</div>
+          <div class="step-why">💡 Why tallow on rest night: Its fatty acids mirror your skin's natural oils, deeply repairing your barrier overnight while you sleep.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ MONDAY ════ -->
+  <div class="day-card bp-theme">
+    <div class="day-header">
+      <div class="day-top">
+        <div class="day-name">Monday</div>
+        <span class="night-pill">🎯 BP Night</span>
+      </div>
+      <div class="day-desc">Benzoyl Peroxide night. Targets active breakouts and kills acne bacteria. No glycolic tonight — they must never be used the same night.</div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title am-title">☀️ Morning Routine</div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body">
+          <div class="step-product">Based Daily Facial Cleanser</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Wet face, massage 30–60 sec, rinse with lukewarm water, pat dry.</div>
+          <div class="step-why">💡 Why: Clears overnight oil buildup from last night's tallow so your skin isn't starting the day congested.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body">
+          <div class="step-product">Skin Revival Spray</div>
+          <div class="step-brand">Based Skincare — Hypochlorous Acid</div>
+          <div class="step-how">📌 How: Mist on clean skin 6–8 inches away, air dry fully before next step.</div>
+          <div class="step-why">💡 Why: Neutralizes any bacteria that built up overnight and soothes skin after cleansing.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">3</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body">
+          <div class="step-product">Under Eye Elixir</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Ring finger, gentle pats only under the eye socket — never drag.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">4</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body">
+          <div class="step-product">Daily Facial Moisturizer</div>
+          <div class="step-brand">Based Skincare — Ceramides + Squalane</div>
+          <div class="step-how">📌 How: Pea-sized amount, press into skin gently, don't drag.</div>
+          <div class="step-why">💡 Why: Hydrates and strengthens barrier before SPF. Ceramides are especially important on BP nights since BP can be drying.</div>
+        </div>
+      </div>
+
+      <div class="step am-step" style="border-left-color: var(--gold);">
+        <div class="step-left"><div class="step-num num-gold">5</div><div class="step-emoji">☀️</div></div>
+        <div class="step-body">
+          <div class="step-product">Anthelios Light Fluid SPF 60</div>
+          <div class="step-brand">La Roche-Posay — ALWAYS last step</div>
+          <div class="step-how">📌 How: Nickel-sized amount on face and neck, let set before going out.</div>
+          <div class="step-warning">⚠️ Critical today: BP from last night leaves skin extra sun-sensitive. Do not skip.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title pm-title-bp">🌙 Night Routine — BP Night</div>
+
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body">
+          <div class="step-product">Based Daily Facial Cleanser</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Full cleanse. Remove SPF, sweat, and all buildup from the day before applying any treatments.</div>
+          <div class="step-why">💡 Why: BP works on clean skin. Applying it over leftover SPF or grime reduces effectiveness and increases irritation.</div>
+        </div>
+      </div>
+
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body">
+          <div class="step-product">Skin Revival Spray</div>
+          <div class="step-brand">Based Skincare — Hypochlorous Acid</div>
+          <div class="step-how">📌 How: Mist, air dry. Works with BP to fight acne bacteria from two angles at once.</div>
+          <div class="step-why">💡 Why before BP: Prepping skin with HOCL calms any inflammation so BP can do its job without adding extra irritation.</div>
+        </div>
+      </div>
+
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">3</div><div class="step-emoji">🎯</div></div>
+        <div class="step-body">
+          <div class="step-product">Lira ICE Clarifying Treatment</div>
+          <div class="step-brand">Lira Clinical — 5% Benzoyl Peroxide</div>
+          <div class="step-how">📌 How: One pump. Apply ONLY to active breakout areas — not all over your face. This is a spot treatment, not a full-face serum.</div>
+          <div class="step-why">💡 Why spot only: Applying BP all over your face causes unnecessary dryness and peeling in areas that don't need it.</div>
+          <div class="step-warning">⚠️ Do NOT use with Glycolic Serum — ever. They must always be on separate nights.</div>
+        </div>
+      </div>
+
+      <div class="step skip-step">
+        <div class="step-left"><div class="step-num num-skip">—</div></div>
+        <div class="step-body">
+          <div class="skip-label">Skip: LRP Glycolic B5 Serum</div>
+          <div class="skip-reason">Never use Glycolic Acid and Benzoyl Peroxide the same night. The combination causes severe irritation, redness, and over-exfoliation. Glycolic gets its own dedicated nights.</div>
+        </div>
+      </div>
+
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">4</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body">
+          <div class="step-product">Under Eye Elixir</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Pat under eyes only. Apply after BP so the BP is fully settled on its target areas.</div>
+        </div>
+      </div>
+
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">5</div><div class="step-emoji">🧈</div></div>
+        <div class="step-body">
+          <div class="step-product">Beef Tallow Moisturizer</div>
+          <div class="step-brand">Based Skincare — Grass-Fed Tallow + Manuka Honey</div>
+          <div class="step-how">📌 How: Warm a small amount in palms, press into full face. Wait 5–10 min after applying BP before putting tallow on.</div>
+          <div class="step-why">💡 Why tallow specifically on BP nights: BP strips your skin's natural fatty acids. Tallow replenishes them. This is why you use the richer tallow here instead of the lighter daily moisturizer.</div>
+          <div class="step-warning">⚠️ Use a dark pillowcase tonight — BP bleaches fabric.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ TUESDAY ════ -->
+  <div class="day-card gly-theme">
+    <div class="day-header">
+      <div class="day-top">
+        <div class="day-name">Tuesday</div>
+        <span class="night-pill">✨ Glycolic Night</span>
+      </div>
+      <div class="day-desc">Glycolic Acid night. Exfoliates dead skin cells, fades dark spots, and improves texture. No BP tonight — they must never share the same night.</div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title am-title">☀️ Morning Routine</div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body">
+          <div class="step-product">Based Daily Facial Cleanser</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Gentle cleanse — your skin may feel slightly sensitive from last night's glycolic. Lukewarm water only, no hot.</div>
+          <div class="step-why">💡 Why gentle: Glycolic acid exfoliated your skin overnight, so the new skin underneath is fresh and slightly more sensitive this morning.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body">
+          <div class="step-product">Skin Revival Spray</div>
+          <div class="step-brand">Based Skincare — Hypochlorous Acid</div>
+          <div class="step-how">📌 How: Mist and air dry. Especially useful after glycolic nights — calms any morning redness or sensitivity.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">3</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body">
+          <div class="step-product">Under Eye Elixir</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Pat gently. Your entire face is slightly more sensitive post-glycolic — be extra gentle here.</div>
+        </div>
+      </div>
+
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">4</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body">
+          <div class="step-product">Daily Facial Moisturizer</div>
+          <div class="step-brand">Based Skincare — Ceramides + Squalane</div>
+          <div class="step-how">📌 How: Full face, press in gently. Don't skip this — moisturizing the morning after glycolic is important.</div>
+          <div class="step-why">💡 Why: Glycolic exfoliation increases transepidermal water loss — your skin needs the ceramides to stay hydrated and not get tight/flaky.</div>
+        </div>
+      </div>
+
+      <div class="step am-step" style="border-left-color: var(--gold);">
+        <div class="step-left"><div class="step-num num-gold">5</div><div class="step-emoji">☀️</div></div>
+        <div class="step-body">
+          <div class="step-product">Anthelios Light Fluid SPF 60</div>
+          <div class="step-brand">La Roche-Posay — ALWAYS last step</div>
+          <div class="step-how">📌 How: Nickel-sized amount, full face and neck.</div>
+          <div class="step-warning">⚠️ Extra critical today: Glycolic acid makes fresh skin cells more UV-sensitive. Skipping SPF after a glycolic night will cause dark spots to get WORSE, not better.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title pm-title-gly">🌙 Night Routine — Glycolic Night</div>
+
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body">
+          <div class="step-product">Based Daily Facial Cleanser</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Full cleanse. Remove all SPF, makeup, and buildup. Glycolic works best on a completely clean face.</div>
+          <div class="step-why">💡 Why: Any leftover SPF or oils create a barrier that stops glycolic acid from penetrating evenly, causing patchy results.</div>
+        </div>
+      </div>
+
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body">
+          <div class="step-product">Skin Revival Spray</div>
+          <div class="step-brand">Based Skincare — Hypochlorous Acid</div>
+          <div class="step-how">📌 How: Mist, air dry fully. Let skin dry completely before applying the glycolic serum — damp skin makes acids absorb faster and can cause irritation.</div>
+        </div>
+      </div>
+
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">3</div><div class="step-emoji">✨</div></div>
+        <div class="step-body">
+          <div class="step-product">Glycolic B5 Dark Spot Corrector Serum</div>
+          <div class="step-brand">La Roche-Posay — 10% Glycolic Acid</div>
+          <div class="step-how">📌 How: 3–4 drops on fingertips, spread evenly across full face. Avoid eyes and lips entirely. Apply to dry skin only.</div>
+          <div class="step-why">💡 Why it works: The 10% glycolic acid dissolves the bonds between dead skin cells and sheds them, revealing fresher skin underneath. The kojic acid and tranexamic acid then target remaining dark spots and discoloration.</div>
+          <div class="step-warning">⚠️ NEVER use this on the same night as Lira ICE (BP). This is non-negotiable.</div>
+        </div>
+      </div>
+
+      <div class="step skip-step">
+        <div class="step-left"><div class="step-num num-skip">—</div></div>
+        <div class="step-body">
+          <div class="skip-label">Skip: Lira ICE Clarifying Treatment (BP)</div>
+          <div class="skip-reason">Glycolic Acid and Benzoyl Peroxide cannot share the same night. Using both causes over-exfoliation, serious irritation, redness, and barrier damage. BP gets Mon/Wed/Fri. Glycolic gets Tue/Thu/Sat.</div>
+        </div>
+      </div>
+
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">4</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body">
+          <div class="step-product">Under Eye Elixir</div>
+          <div class="step-brand">Based Skincare</div>
+          <div class="step-how">📌 How: Pat under eyes only, after glycolic has settled on skin (~2–3 min). Keep away from eyelids.</div>
+        </div>
+      </div>
+
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">5</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body">
+          <div class="step-product">Daily Facial Moisturizer</div>
+          <div class="step-brand">Based Skincare — Ceramides + Squalane</div>
+          <div class="step-how">📌 How: Apply over the glycolic serum after it's absorbed (~3–5 min). Lighter than tallow so it doesn't smother the acid's overnight work.</div>
+          <div class="step-why">💡 Why lighter moisturizer here: Heavy occlusives like tallow can trap the acid on the skin too intensely. The ceramide moisturizer keeps you hydrated while letting glycolic do its job gently through the night.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ WEDNESDAY ════ -->
+  <div class="day-card bp-theme">
+    <div class="day-header">
+      <div class="day-top">
+        <div class="day-name">Wednesday</div>
+        <span class="night-pill">🎯 BP Night</span>
+      </div>
+      <div class="day-desc">Same as Monday. Benzoyl Peroxide spot treatment night. Keeps acne bacteria consistently managed through the week.</div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title am-title">☀️ Morning Routine</div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body"><div class="step-product">Based Daily Facial Cleanser</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Wet, massage 30–60 sec, rinse lukewarm, pat dry.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body"><div class="step-product">Skin Revival Spray</div><div class="step-brand">Based Skincare — Hypochlorous Acid</div><div class="step-how">📌 How: Mist 6–8 inches away, air dry fully.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">3</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body"><div class="step-product">Under Eye Elixir</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Ring finger, pat gently under eye socket only.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">4</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body"><div class="step-product">Daily Facial Moisturizer</div><div class="step-brand">Based Skincare — Ceramides + Squalane</div><div class="step-how">📌 How: Pea-size, press into skin.</div><div class="step-why">💡 Rebuilds barrier that BP dried out last night.</div></div>
+      </div>
+      <div class="step am-step" style="border-left-color: var(--gold);">
+        <div class="step-left"><div class="step-num num-gold">5</div><div class="step-emoji">☀️</div></div>
+        <div class="step-body"><div class="step-product">Anthelios Light Fluid SPF 60</div><div class="step-brand">La Roche-Posay</div><div class="step-how">📌 How: Nickel-sized amount, full face and neck, always last.</div><div class="step-warning">⚠️ Skin is extra sun-sensitive after BP. Non-negotiable.</div></div>
+      </div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title pm-title-bp">🌙 Night Routine — BP Night</div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body"><div class="step-product">Based Daily Facial Cleanser</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Full cleanse — remove SPF and day buildup completely before any treatment.</div></div>
+      </div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body"><div class="step-product">Skin Revival Spray</div><div class="step-brand">Based Skincare — Hypochlorous Acid</div><div class="step-how">📌 How: Mist, air dry. Reduces inflammation before spot treatment.</div></div>
+      </div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">3</div><div class="step-emoji">🎯</div></div>
+        <div class="step-body"><div class="step-product">Lira ICE Clarifying Treatment</div><div class="step-brand">Lira Clinical — 5% Benzoyl Peroxide</div><div class="step-how">📌 How: One pump, spot treat breakout areas only — not full face.</div><div class="step-warning">⚠️ Never same night as Glycolic Serum.</div></div>
+      </div>
+      <div class="step skip-step">
+        <div class="step-left"><div class="step-num num-skip">—</div></div>
+        <div class="step-body"><div class="skip-label">Skip: LRP Glycolic B5 Serum</div><div class="skip-reason">BP and Glycolic Acid cannot be used the same night. Glycolic is Tuesday, Thursday, Saturday.</div></div>
+      </div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">4</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body"><div class="step-product">Under Eye Elixir</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Pat gently after BP has settled (5 min).</div></div>
+      </div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">5</div><div class="step-emoji">🧈</div></div>
+        <div class="step-body"><div class="step-product">Beef Tallow Moisturizer</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Press into full face after BP has absorbed (~5–10 min).</div><div class="step-why">💡 Repairs the barrier BP stripped. Richer than the daily moisturizer — use it here specifically.</div><div class="step-warning">⚠️ Dark pillowcase tonight.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ THURSDAY ════ -->
+  <div class="day-card gly-theme">
+    <div class="day-header">
+      <div class="day-top">
+        <div class="day-name">Thursday</div>
+        <span class="night-pill">✨ Glycolic Night</span>
+      </div>
+      <div class="day-desc">Same as Tuesday. Glycolic exfoliation night. Fades dark spots and smooths texture. No BP tonight.</div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title am-title">☀️ Morning Routine</div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body"><div class="step-product">Based Daily Facial Cleanser</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Gentle cleanse — skin may be slightly sensitive after last night's BP. Lukewarm water only.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body"><div class="step-product">Skin Revival Spray</div><div class="step-brand">Based Skincare — Hypochlorous Acid</div><div class="step-how">📌 How: Mist, air dry. Calms any morning sensitivity from last night's BP treatment.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">3</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body"><div class="step-product">Under Eye Elixir</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Pat gently under eye area only.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">4</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body"><div class="step-product">Daily Facial Moisturizer</div><div class="step-brand">Based Skincare — Ceramides + Squalane</div><div class="step-how">📌 How: Press into skin. Locks in hydration before SPF.</div></div>
+      </div>
+      <div class="step am-step" style="border-left-color: var(--gold);">
+        <div class="step-left"><div class="step-num num-gold">5</div><div class="step-emoji">☀️</div></div>
+        <div class="step-body"><div class="step-product">Anthelios Light Fluid SPF 60</div><div class="step-brand">La Roche-Posay</div><div class="step-how">📌 How: Nickel-sized, full face, always last step.</div><div class="step-warning">⚠️ Non-negotiable daily. BP from last night = extra sun sensitivity.</div></div>
+      </div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title pm-title-gly">🌙 Night Routine — Glycolic Night</div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body"><div class="step-product">Based Daily Facial Cleanser</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Full cleanse. Remove everything before glycolic.</div></div>
+      </div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body"><div class="step-product">Skin Revival Spray</div><div class="step-brand">Based Skincare — Hypochlorous Acid</div><div class="step-how">📌 How: Mist, air dry fully. Wait until skin is completely dry before applying glycolic.</div></div>
+      </div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">3</div><div class="step-emoji">✨</div></div>
+        <div class="step-body"><div class="step-product">Glycolic B5 Dark Spot Corrector Serum</div><div class="step-brand">La Roche-Posay — 10% Glycolic Acid</div><div class="step-how">📌 How: 3–4 drops, apply to dry skin, spread across full face, avoid eyes and lips.</div><div class="step-warning">⚠️ NEVER same night as BP. These two must always alternate.</div></div>
+      </div>
+      <div class="step skip-step">
+        <div class="step-left"><div class="step-num num-skip">—</div></div>
+        <div class="step-body"><div class="skip-label">Skip: Lira ICE Clarifying Treatment (BP)</div><div class="skip-reason">BP and Glycolic cannot coexist the same night — causes severe irritation and barrier damage. BP nights are Monday, Wednesday, Friday.</div></div>
+      </div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">4</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body"><div class="step-product">Under Eye Elixir</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Pat gently after glycolic settles (~2–3 min). Keep away from eyelids.</div></div>
+      </div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">5</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body"><div class="step-product">Daily Facial Moisturizer</div><div class="step-brand">Based Skincare — Ceramides + Squalane</div><div class="step-how">📌 How: After glycolic absorbs (~3–5 min), apply lightly over full face.</div><div class="step-why">💡 Lighter moisturizer here — not tallow — so it doesn't over-occlude the acid's overnight work.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ FRIDAY ════ -->
+  <div class="day-card bp-theme">
+    <div class="day-header">
+      <div class="day-top">
+        <div class="day-name">Friday</div>
+        <span class="night-pill">🎯 BP Night</span>
+      </div>
+      <div class="day-desc">Final BP night of the week. Same as Monday and Wednesday. Finishing the week strong on acne management.</div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title am-title">☀️ Morning Routine</div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body"><div class="step-product">Based Daily Facial Cleanser</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Gentle cleanse — skin may be slightly sensitive after Thurs glycolic. Lukewarm water only.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body"><div class="step-product">Skin Revival Spray</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Mist, air dry.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">3</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body"><div class="step-product">Under Eye Elixir</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Ring finger, pat only under eye socket.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">4</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body"><div class="step-product">Daily Facial Moisturizer</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Pea-size, press in, no dragging.</div></div>
+      </div>
+      <div class="step am-step" style="border-left-color: var(--gold);">
+        <div class="step-left"><div class="step-num num-gold">5</div><div class="step-emoji">☀️</div></div>
+        <div class="step-body"><div class="step-product">Anthelios Light Fluid SPF 60</div><div class="step-brand">La Roche-Posay</div><div class="step-how">📌 How: Nickel-size, full face, always last.</div><div class="step-warning">⚠️ Extra critical — after glycolic last night, fresh skin cells are highly UV-sensitive today.</div></div>
+      </div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title pm-title-bp">🌙 Night Routine — BP Night</div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body"><div class="step-product">Based Daily Facial Cleanser</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Full cleanse — remove entire day before BP treatment.</div></div>
+      </div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body"><div class="step-product">Skin Revival Spray</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Mist, air dry before applying BP.</div></div>
+      </div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">3</div><div class="step-emoji">🎯</div></div>
+        <div class="step-body"><div class="step-product">Lira ICE Clarifying Treatment</div><div class="step-brand">Lira Clinical — 5% Benzoyl Peroxide</div><div class="step-how">📌 How: One pump, spot treat active breakouts only.</div><div class="step-warning">⚠️ Never same night as Glycolic.</div></div>
+      </div>
+      <div class="step skip-step">
+        <div class="step-left"><div class="step-num num-skip">—</div></div>
+        <div class="step-body"><div class="skip-label">Skip: LRP Glycolic B5 Serum</div><div class="skip-reason">Glycolic gets Tue/Thu/Sat only. Never mix with BP.</div></div>
+      </div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">4</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body"><div class="step-product">Under Eye Elixir</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Pat gently after BP settles.</div></div>
+      </div>
+      <div class="step bp-step">
+        <div class="step-left"><div class="step-num num-bp">5</div><div class="step-emoji">🧈</div></div>
+        <div class="step-body"><div class="step-product">Beef Tallow Moisturizer</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Press into full face 5–10 min after BP. Rich barrier repair overnight going into the weekend.</div><div class="step-warning">⚠️ Dark pillowcase — BP bleaches fabric.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SATURDAY ════ -->
+  <div class="day-card gly-theme">
+    <div class="day-header">
+      <div class="day-top">
+        <div class="day-name">Saturday</div>
+        <span class="night-pill">✨ Glycolic Night</span>
+      </div>
+      <div class="day-desc">Final glycolic night before Sunday's full rest. Wrapping up the week with exfoliation and dark spot treatment.</div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title am-title">☀️ Morning Routine</div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body"><div class="step-product">Based Daily Facial Cleanser</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Gentle cleanse — remove residue from last night's BP treatment. Lukewarm only.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body"><div class="step-product">Skin Revival Spray</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Mist, air dry.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">3</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body"><div class="step-product">Under Eye Elixir</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Pat gently under eyes.</div></div>
+      </div>
+      <div class="step am-step">
+        <div class="step-left"><div class="step-num num-am">4</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body"><div class="step-product">Daily Facial Moisturizer</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Full face, press in gently.</div></div>
+      </div>
+      <div class="step am-step" style="border-left-color: var(--gold);">
+        <div class="step-left"><div class="step-num num-gold">5</div><div class="step-emoji">☀️</div></div>
+        <div class="step-body"><div class="step-product">Anthelios Light Fluid SPF 60</div><div class="step-brand">La Roche-Posay</div><div class="step-how">📌 How: Nickel-size, full face, last step.</div><div class="step-warning">⚠️ Non-negotiable — BP from last night means extra sun sensitivity today.</div></div>
+      </div>
+    </div>
+
+    <div class="routine-block">
+      <div class="block-title pm-title-gly">🌙 Night Routine — Glycolic Night</div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">1</div><div class="step-emoji">🧼</div></div>
+        <div class="step-body"><div class="step-product">Based Daily Facial Cleanser</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Full cleanse. Remove all SPF and buildup before glycolic.</div></div>
+      </div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">2</div><div class="step-emoji">💦</div></div>
+        <div class="step-body"><div class="step-product">Skin Revival Spray</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Mist, fully air dry before applying glycolic — damp skin intensifies acid absorption.</div></div>
+      </div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">3</div><div class="step-emoji">✨</div></div>
+        <div class="step-body"><div class="step-product">Glycolic B5 Dark Spot Corrector Serum</div><div class="step-brand">La Roche-Posay — 10% Glycolic Acid</div><div class="step-how">📌 How: 3–4 drops on dry skin, spread across full face, avoid eyes and lips.</div><div class="step-warning">⚠️ Final glycolic night of the week. NEVER same night as BP.</div></div>
+      </div>
+      <div class="step skip-step">
+        <div class="step-left"><div class="step-num num-skip">—</div></div>
+        <div class="step-body"><div class="skip-label">Skip: Lira ICE Clarifying Treatment (BP)</div><div class="skip-reason">BP and Glycolic must never be used the same night. BP is done for the week — resumes Monday.</div></div>
+      </div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">4</div><div class="step-emoji">👁️</div></div>
+        <div class="step-body"><div class="step-product">Under Eye Elixir</div><div class="step-brand">Based Skincare</div><div class="step-how">📌 How: Pat gently 2–3 min after glycolic. Keep away from eyelids.</div></div>
+      </div>
+      <div class="step gly-step">
+        <div class="step-left"><div class="step-num num-gly">5</div><div class="step-emoji">🫧</div></div>
+        <div class="step-body"><div class="step-product">Daily Facial Moisturizer</div><div class="step-brand">Based Skincare — Ceramides + Squalane</div><div class="step-how">📌 How: Apply 3–5 min after glycolic. Lighter seal so glycolic can work through the night undisturbed. Tomorrow is rest day — your skin will recover fully on Sunday.</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /scroll-row -->
+
+<!-- ══════ RULES ══════ -->
+<div class="sec-label">⚡ Key Rules</div>
+<div class="rules-list">
+  <div class="rule-card">
+    <div class="rule-icon">🚫</div>
+    <div><div class="rule-title">Never Mix BP + Glycolic the Same Night — Ever</div><div class="rule-body">This is the cardinal rule of your entire routine. Benzoyl Peroxide (Lira ICE) and Glycolic Acid (LRP Serum) used together cause severe dryness, redness, peeling, and barrier damage. They work great — just never on the same night. BP is Mon/Wed/Fri. Glycolic is Tue/Thu/Sat. That's it.</div></div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">🧈</div>
+    <div><div class="rule-title">Beef Tallow on BP Nights — Daily Moisturizer on Glycolic Nights</div><div class="rule-body">Not interchangeable. BP strips your skin's natural fatty acids — tallow is rich enough to fully replace them overnight. On glycolic nights, the lighter ceramide moisturizer seals hydration without smothering the acid's work. Using tallow on glycolic nights could over-occlude the acid and cause irritation.</div></div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">☀️</div>
+    <div><div class="rule-title">SPF 60 Every Single Morning — No Exceptions</div><div class="rule-body">Both Benzoyl Peroxide and Glycolic Acid increase your skin's photosensitivity. On the mornings after glycolic especially, your freshly exfoliated skin will burn faster and dark spots will get WORSE without SPF. The LRP Anthelios goes on last, every morning, regardless of weather.</div></div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">🛏️</div>
+    <div><div class="rule-title">Protect Your Pillowcase on BP Nights (Mon/Wed/Fri)</div><div class="rule-body">Benzoyl Peroxide actively bleaches fabric. If you use a white or light pillowcase on BP nights, it will get discolored spots. Use a dark or old pillowcase Mon/Wed/Fri, or wait 10–15 min after applying tallow before lying down.</div></div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">📈</div>
+    <div><div class="rule-title">Build Up Slowly the First Two Weeks</div><div class="rule-body">Don't jump straight into the full schedule on Day 1. Week 1: use each active just 1–2x total. Week 2: move to 2–3x. Full alternating schedule from Week 3 onward once your skin has adapted and you know how it's reacting.</div></div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">💦</div>
+    <div><div class="rule-title">Skin Revival Spray Is Your Most Flexible Product</div><div class="rule-body">Hypochlorous Acid plays well with literally everything in this routine. Use it AM and PM every day, and use it as a bonus spray after the gym, after touching your face, or anytime your skin feels irritated or inflamed mid-day. No rinsing needed.</div></div>
+  </div>
+</div>
+
+<div class="footer">Built for Matt · 8 products · 3 night modes · No active-on-active conflicts</div>
+
 </body>
 </html>
